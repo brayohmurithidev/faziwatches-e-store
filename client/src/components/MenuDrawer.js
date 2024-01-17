@@ -1,12 +1,6 @@
 import React from "react";
-import { Home, Settings, Shop } from "@mui/icons-material";
-import {
-  Divider,
-  Drawer,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+
+import { Drawer, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 
 const MenuDrawer = ({ open, setOpen, menus }) => {
   return (

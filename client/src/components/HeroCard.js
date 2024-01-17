@@ -13,10 +13,13 @@ const HeroCard = (props) => {
       className="card-wrapper"
     >
       <div className="card-content">
-        <h4>NEW COLLECTION</h4>
+        <h4>{props?.name}</h4>
         <h6>
-          <a style={{ color: props.color || "var(--white-color)" }} href="#">
-            Shop Collection
+          <a
+            style={{ color: props.color || "var(--white-color)" }}
+            href="https://shopnow.com"
+          >
+            {props.link}
           </a>
         </h6>
       </div>

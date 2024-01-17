@@ -1,11 +1,6 @@
 import React from "react";
 import { IconButton } from "@mui/material";
-import {
-  FavoriteBorder,
-  LocalMall,
-  Person,
-  ShoppingBasket,
-} from "@mui/icons-material";
+import { FavoriteBorder, Person, ShoppingBasket } from "@mui/icons-material";
 
 const CounterIcon = () => {
   return (

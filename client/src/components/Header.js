@@ -1,33 +1,41 @@
-import React, { useState } from "react";
-import {
-  Button,
-  FormControl,
-  Grid,
-  IconButton,
-  InputAdornment,
-  TextField,
-} from "@mui/material";
-import { Search } from "@mui/icons-material";
+import React from "react";
 import CounterIcon from "./CounterIcon";
+import { Box, Typography } from "@mui/material";
+import SearchForm from "./SearchForm";
 
 const Header = () => {
-  const [searchIsOpen, setSearchIsOpen] = useState(false);
   return (
     <div className="header-section">
-      <div className="header-wrapper">
-        <div className="header-logo">
-          <h3>
-            <span>F</span>AZI<span>W</span>ATCHES
-          </h3>
-        </div>
-        <div className="header-icons">
-          <CounterIcon />
-        </div>
-        <div className="header-search">
-          <input type="text" placeholder="Search products..." />
-          <button>Search</button>
-        </div>
-      </div>
+      <Box className="header-wrapper" sx={{ alignItems: { md: "start" } }}>
+        <Box className="header-logo" sx={{ alignText: "right" }}>
+          <Typography
+            className="logo"
+            sx={{
+              fontSize: { md: "2rem", xs: "2rem" },
+              marginLeft: { md: "30px" },
+            }}
+          >
+            <span>F</span>
+            <span>A</span>
+            <span>Z</span>
+            <span>I</span>
+            <span>W</span>
+            <span>A</span>
+            <span>T</span>
+            <span>C</span>
+            <span>H</span>
+            <span>E</span>
+            <span>S</span>
+          </Typography>
+        </Box>
+        <Box sx={{ display: { md: "none" } }}>
+          <SearchForm
+            btnName="Search"
+            type="text"
+            placeholder="Search products..."
+          />
+        </Box>
+      </Box>
     </div>
   );
 };

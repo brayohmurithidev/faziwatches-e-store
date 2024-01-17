@@ -1,19 +1,13 @@
 import React from "react";
-import { Button, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 
 const ProductGridItem = (props) => {
   return (
-    <Paper
-      elevation={2}
-      className="product-item-wrapper"
-      // style={{
-      //   backgroundImage: `url(${props.image})`,
-      // }}
-    >
+    <Paper elevation={2} className="product-item-wrapper">
       {/*    category*/}
       <div className="product-item-content">
         {/*IMage*/}
-        <img src={props.image} width="60%" />
+        <img src={props.image} width="60%" alt={props.title} />
         <p>
           {props.category.map((cat, index) => (
             <span key={index}>{cat} </span>

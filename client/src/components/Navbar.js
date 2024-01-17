@@ -1,21 +1,43 @@
 import React from "react";
-import { IconButton, ListItem, ListItemText } from "@mui/material";
+import { Box, IconButton, ListItem, ListItemText } from "@mui/material";
 import { Menu } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+import CounterIcon from "./CounterIcon";
+import SearchForm from "./SearchForm";
 
 const Navbar = ({ menus, setOpen }) => {
   return (
     <div className="navbarWrapper">
-      <IconButton className="hamburger-icon" onClick={() => setOpen(true)}>
+      <IconButton
+        sx={{ display: { md: "none" } }}
+        className="hamburger-icon"
+        onClick={() => setOpen(true)}
+      >
         <Menu sx={{ color: "var(--white-color)" }} />
       </IconButton>
 
-      <div className="list">
+      <Box
+        sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
+        className="list"
+      >
         {menus?.map((menu, index) => (
-          <ListItem key={index}>
-            <ListItemText primary={menu.name} />
+          <ListItem className="navMenu-item" key={index}>
+            <Link className="link" to={menu.url}>
+              {menu.name}
+            </Link>
           </ListItem>
         ))}
-      </div>
+      </Box>
+      <Box sx={{ display: { xs: "none", md: "flex" } }}>
+        <SearchForm
+          btnName="Search"
+          type="text"
+          placeholder="Search products..."
+        />
+      </Box>
+      <Box>
+        <CounterIcon />
+      </Box>
     </div>
   );
 };

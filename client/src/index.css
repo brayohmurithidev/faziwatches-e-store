@@ -3,15 +3,19 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 :root {
     --primary-color: #252525;
+    /*--primary-color: #ffffff;*/
     --black-color: #000000;
+    /*--black-color: rgba(253, 251, 250, 0.44);*/
     --lotion-color: rgba(253, 251, 250, 0.44);
     --lightGray-color: #4b4b4b;
     --paleTaupe-color: #c09578;
     --white-color: #ffffff;
+    /*--white-color: #4b4b4b;*/
     --seashell-color: #fcf5eb;
     --desertSand-color: #edc9a7;
     --h1: 2.986rem;

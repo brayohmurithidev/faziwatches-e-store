@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "@mui/material";
-import heroImg from "../assets/images/7.jpg";
 
 const HeroSection = () => {
   return (
@@ -11,6 +10,7 @@ const HeroSection = () => {
         </h1>
         <h5>__ UP TO 40% OFF __</h5>
         <Button
+          className="btn"
           variant="contained"
           sx={{
             color: "var(--black-color)",
