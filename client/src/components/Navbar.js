@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, IconButton, ListItem, ListItemText } from "@mui/material";
 import { Menu } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import CounterIcon from "./CounterIcon";
 import SearchForm from "./SearchForm";
 
@@ -22,9 +22,15 @@ const Navbar = ({ menus, setOpen }) => {
       >
         {menus?.map((menu, index) => (
           <ListItem className="navMenu-item" key={index}>
-            <Link className="link" to={menu.url}>
+            <NavLink
+              className={({ isActive }) => {
+                return isActive ? "link active" : "link";
+              }}
+              style={{}}
+              to={menu.url}
+            >
               {menu.name}
-            </Link>
+            </NavLink>
           </ListItem>
         ))}
       </Box>

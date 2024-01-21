@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tab } from "@mui/material";
+import { Tab, Tabs } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 
 const TabsPanel = (props) => {
@@ -11,11 +11,16 @@ const TabsPanel = (props) => {
   return (
     <>
       <TabContext value={value}>
-        <TabList value={value} onChange={handleChange}>
+        <Tabs
+          textColor="primary"
+          indicatorColor="secondary"
+          value={value}
+          onChange={handleChange}
+        >
           {props.content?.map((item, index) => (
             <Tab key={index} value={item.tabName} label={item.tabName} />
           ))}
-        </TabList>
+        </Tabs>
         {props.content?.map((item, index) => (
           <TabPanel value={item.tabName}>{item.tabContent}</TabPanel>
         ))}

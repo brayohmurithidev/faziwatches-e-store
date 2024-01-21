@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import HeroSection from "../components/HeroSection";
-import { Box, Button, Grid, ImageListItem, ImageList } from "@mui/material";
+import { Box, Grid, ImageList, ImageListItem } from "@mui/material";
 import HeroCard from "../components/HeroCard";
 import image1 from "../assets/images/2.png";
 import image2 from "../assets/images/15.png";
@@ -14,15 +14,27 @@ import gallery4 from "../assets/images/gallery-4.jpg";
 import gallery5 from "../assets/images/gallery-5.jpg";
 import gallery6 from "../assets/images/gallery-6.jpg";
 
-import { products } from "../utils/products";
 import CountdownSale from "../components/CountdownSale";
+import axios from "axios";
+import { useLoaderData } from "react-router-dom";
 
-const productCategories = ["Watches", "Men", "Ladies", "Smart Watches"];
+// const productCategories = ["Watches", "Men", "Ladies", "Smart Watches"];
 
 const days = 2;
 
 const LandingPage = (props) => {
+  const products = useLoaderData();
   const [productCategory, setProductCategory] = useState("Watches");
+
+  // SEPARATE BEST SELLING AND FEATURED
+  const bestSelling = products.filter((prod) =>
+    prod.tags?.includes("Best Selling"),
+  );
+  const featured = products.filter((prod) => prod.tags?.includes("Featured"));
+
+  const prodCategories = bestSelling.map((b) => b.categories);
+  const productCategories = [...new Set(prodCategories.flat())];
+
   return (
     <>
       {/*HERO SECTION*/}
@@ -47,7 +59,7 @@ const LandingPage = (props) => {
             name="SIMPLE ELEGANCE"
             link="Shop Now"
             image1={image2}
-            bgColor="var(--desertSand-color)"
+            bgColor="var(--accent-color)"
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -55,7 +67,7 @@ const LandingPage = (props) => {
             image1={image3}
             name="SPECIAL EDITION"
             link="Explore Product"
-            bgColor="var(--seashell-color)"
+            bgColor="var(--card-background-color)"
             color="var(--lightGray-color)"
           />
         </Grid>
@@ -64,15 +76,33 @@ const LandingPage = (props) => {
       <div className="best-selling-section section">
         <div className="title-wrapper">
           <h3>BEST SELLERS</h3>
+          {/*<FormControl*/}
+          {/*  variant="standard"*/}
+          {/*  sx={{ m: 1, width: 50, height: 50 }}*/}
+          {/*  size="small"*/}
+          {/*>*/}
+          {/*  <Select*/}
+          {/*    value={productCategory}*/}
+          {/*    onChange={(e) => setProductCategory(e.target.value)}*/}
+          {/*  >*/}
+          {/*    <MenuItem value="">*/}
+          {/*      <em>None</em>*/}
+          {/*    </MenuItem>*/}
+          {/*    {productCategories.splice(2, 6).map((cat, index) => (*/}
+          {/*      <MenuItem value={cat}>{cat}</MenuItem>*/}
+          {/*    ))}*/}
+          {/*  </Select>*/}
+          {/*</FormControl>*/}
+
           <div className="categories-sort">
             <ul>
-              {productCategories.map((cat, index) => (
+              {productCategories?.splice(2, 6)?.map((cat, index) => (
                 <li key={index}>
                   <p
                     style={{
                       color:
                         productCategory === cat
-                          ? "var(--desertSand-color)"
+                          ? "var(--primary-color)"
                           : "color: var(--white-color)",
                     }}
                     onClick={() => setProductCategory(cat)}
@@ -95,27 +125,16 @@ const LandingPage = (props) => {
             justifyContent: { md: "left", xs: "center" },
           }}
         >
-          {products.filter((prod) => prod.category.includes(productCategory)) <
-          1 ? (
+          {bestSelling.filter((prod) =>
+            prod.categories?.includes(productCategory),
+          ) < 1 ? (
             <h3 style={{ marginTop: "20px" }}>No product found</h3>
           ) : (
-            products
-              .filter((prod) => prod.category?.includes(productCategory))
+            bestSelling
+              .filter((prod) => prod.categories?.includes(productCategory))
               .map((prod, index) => (
-                <Grid
-                  onClick={() => props.setOpen(true)}
-                  key={index}
-                  xs={6}
-                  md={4}
-                  lg={2}
-                  item
-                >
-                  <ProductGridItem
-                    image={prod.image}
-                    price={prod.price}
-                    title={prod.name}
-                    category={prod.category}
-                  />
+                <Grid key={index} xs={6} md={4} lg={2} item>
+                  <ProductGridItem product={prod} />
                 </Grid>
               ))
           )}
@@ -147,14 +166,9 @@ const LandingPage = (props) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <Grid container spacing={2}>
-              {products.map((prod, index) => (
+              {featured.map((prod, index) => (
                 <Grid key={index} xs={6} md={4} lg={3} item>
-                  <ProductGridItem
-                    image={prod.image}
-                    price={prod.price}
-                    title={prod.name}
-                    category={prod.category}
-                  />
+                  <ProductGridItem product={prod} />
                 </Grid>
               ))}
             </Grid>
@@ -191,3 +205,9 @@ const LandingPage = (props) => {
 };
 
 export default LandingPage;
+
+export const landingLoader = async () => {
+  const res = await axios.get("http://localhost:4000/products");
+
+  return res.data;
+};

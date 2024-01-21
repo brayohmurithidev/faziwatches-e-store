@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import Toolbar from "./Toolbar";
-import { Divider, Paper } from "@mui/material";
-import Header from "./Header";
-import Navbar from "./Navbar";
-import MenuDrawer from "./MenuDrawer";
+import Toolbar from "../components/Toolbar";
+import { Divider } from "@mui/material";
+import Header from "../components/Header";
+import Navbar from "../components/Navbar";
+import MenuDrawer from "../components/MenuDrawer";
 import { Home, Settings, Shop } from "@mui/icons-material";
 import { Outlet } from "react-router-dom";
-import Footer from "./Footer";
-import ProductDrawer from "./ProductDrawer";
+import Footer from "../components/Footer";
 
 const menus = [
   {
@@ -27,12 +26,12 @@ const menus = [
   },
 ];
 
-const Layout = (props) => {
+const MainLayout = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
 
   return (
     <>
-      <Paper elevation={5} className="App">
+      <div className="App">
         <Toolbar />
         <Divider sx={{ backgroundColor: "var(--lightGray-color)" }} />
         {/*HEADER SECTION*/}
@@ -41,11 +40,10 @@ const Layout = (props) => {
         <Navbar menus={menus} open={openDrawer} setOpen={setOpenDrawer} />
         <Outlet />
         <Footer />
-      </Paper>
+      </div>
       <MenuDrawer menus={menus} open={openDrawer} setOpen={setOpenDrawer} />
-      <ProductDrawer open={props.open} setOpen={props.setOpen} />
     </>
   );
 };
 
-export default Layout;
+export default MainLayout;

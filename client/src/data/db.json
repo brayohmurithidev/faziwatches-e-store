@@ -1,0 +1,452 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Classic Analog Watch",
+      "images": [
+        "https://shorturl.at/iwz89",
+        "https://shorturl.at/eiuw2"
+      ],
+      "tags": [
+        "Featured"
+      ],
+      "categories": [
+        "Classic",
+        "Analog"
+      ],
+      "price": 49.99,
+      "description": "A timeless classic analog watch for any occasion.",
+      "reviews": []
+    },
+    {
+      "id": 2,
+      "title": "Sports Chronograph Watch",
+      "images": [
+        "https://shorturl.at/iwz89"
+      ],
+      "tags": [
+        "Best Selling"
+      ],
+      "categories": [
+        "Sports",
+        "Chronograph",
+        "Watches",
+        "Men"
+      ],
+      "price": 79.99,
+      "rating": 2,
+      "description": "Perfect for sports enthusiasts with a stylish chronograph design.",
+      "reviews": []
+    },
+    {
+      "id": 3,
+      "title": "Digital Smartwatch",
+      "images": [
+        "https://example.com/watch3.jpg"
+      ],
+      "tags": [
+        "Best Selling"
+      ],
+      "categories": [
+        "Digital",
+        "Smartwatch",
+        "Watches",
+        "Men"
+      ],
+      "price": 129.99,
+      "description": "Stay connected with this feature-rich digital smartwatch.",
+      "reviews": []
+    },
+    {
+      "id": 4,
+      "title": "Elegant Leather Strap Watch",
+      "images": [
+        "https://example.com/watch4.jpg"
+      ],
+      "categories": [
+        "Elegant",
+        "Leather Strap",
+        "Watches",
+        "Ladies"
+      ],
+      "price": 69.99,
+      "description": "An elegant watch with a comfortable leather strap.",
+      "reviews": []
+    },
+    {
+      "id": 5,
+      "title": "Diver's Waterproof Watch",
+      "images": [
+        "https://example.com/watch5.jpg"
+      ],
+      "categories": [
+        "Diver's",
+        "Waterproof"
+      ],
+      "price": 89.99,
+      "description": "Designed for divers with waterproof features and a durable build.",
+      "reviews": []
+    },
+    {
+      "id": 6,
+      "title": "Minimalist Stainless Steel Watch",
+      "images": [
+        "https://example.com/watch6.jpg"
+      ],
+      "categories": [
+        "Minimalist",
+        "Stainless Steel"
+      ],
+      "price": 59.99,
+      "description": "A sleek and minimalist design crafted from stainless steel.",
+      "reviews": []
+    },
+    {
+      "id": 7,
+      "title": "Aviator Pilot Watch",
+      "images": [
+        "https://example.com/watch7.jpg"
+      ],
+      "tags": [
+        "Best Selling"
+      ],
+      "categories": [
+        "Aviator",
+        "Pilot"
+      ],
+      "price": 109.99,
+      "description": "A stylish aviator pilot watch with precision and functionality.",
+      "reviews": []
+    },
+    {
+      "id": 8,
+      "title": "Fashionable Rose Gold Watch",
+      "images": [
+        "https://example.com/watch8.jpg"
+      ],
+      "categories": [
+        "Fashionable",
+        "Rose Gold"
+      ],
+      "price": 79.99,
+      "description": "Make a statement with this fashionable rose gold watch.",
+      "reviews": []
+    },
+    {
+      "id": 9,
+      "title": "Rugged Military Style Watch",
+      "images": [
+        "https://example.com/watch9.jpg"
+      ],
+      "categories": [
+        "Rugged",
+        "Military Style"
+      ],
+      "price": 94.99,
+      "description": "A rugged and durable military-style watch for outdoor enthusiasts.",
+      "reviews": []
+    },
+    {
+      "id": 10,
+      "title": "Luxury Automatic Watch",
+      "images": [
+        "https://example.com/watch10.jpg"
+      ],
+      "categories": [
+        "Luxury",
+        "Automatic"
+      ],
+      "price": 249.99,
+      "description": "Experience luxury with this automatic watch featuring intricate details.",
+      "reviews": []
+    },
+    {
+      "id": 11,
+      "title": "Fitness Tracker Watch",
+      "images": [
+        "https://example.com/watch11.jpg"
+      ],
+      "tags": [
+        "Best Selling",
+        "Featured"
+      ],
+      "categories": [
+        "Fitness Tracker"
+      ],
+      "price": 89.99,
+      "description": "Monitor your fitness goals with this feature-packed fitness tracker watch.",
+      "reviews": []
+    },
+    {
+      "id": 12,
+      "title": "Classic Gold-plated Watch",
+      "images": [
+        "https://example.com/watch12.jpg"
+      ],
+      "categories": [
+        "Classic",
+        "Gold-plated"
+      ],
+      "price": 129.99,
+      "description": "Add a touch of elegance with this classic gold-plated watch.",
+      "reviews": []
+    },
+    {
+      "id": 13,
+      "title": "Sleek Titanium Watch",
+      "images": [
+        "https://example.com/watch13.jpg"
+      ],
+      "categories": [
+        "Sleek",
+        "Titanium"
+      ],
+      "price": 159.99,
+      "description": "A sleek and lightweight titanium watch for everyday wear.",
+      "reviews": []
+    },
+    {
+      "id": 14,
+      "title": "Vintage Pocket Watch",
+      "images": [
+        "https://example.com/watch14.jpg"
+      ],
+      "tags": [
+        "Best Selling"
+      ],
+      "categories": [
+        "Vintage",
+        "Pocket Watch"
+      ],
+      "price": 79.99,
+      "description": "Capture the essence of the past with this vintage pocket watch.",
+      "reviews": []
+    },
+    {
+      "id": 15,
+      "title": "Futuristic LED Watch",
+      "images": [
+        "https://example.com/watch15.jpg"
+      ],
+      "categories": [
+        "Futuristic",
+        "LED"
+      ],
+      "price": 49.99,
+      "description": "Stay ahead of the trends with this futuristic LED watch.",
+      "reviews": []
+    },
+    {
+      "id": 16,
+      "title": "Classic Square-faced Watch",
+      "images": [
+        "https://example.com/watch16.jpg"
+      ],
+      "categories": [
+        "Classic",
+        "Square-faced"
+      ],
+      "price": 69.99,
+      "description": "A classic timepiece with a unique square-faced design.",
+      "reviews": []
+    },
+    {
+      "id": 17,
+      "title": "Outdoor Adventure Watch",
+      "images": [
+        "https://example.com/watch17.jpg"
+      ],
+      "tags": [
+        "Best Selling"
+      ],
+      "categories": [
+        "Outdoor Adventure"
+      ],
+      "price": 109.99,
+      "description": "Built for outdoor enthusiasts, this watch can handle any adventure.",
+      "reviews": []
+    },
+    {
+      "id": 18,
+      "title": "Retro Mechanical Watch",
+      "images": [
+        "https://example.com/watch18.jpg"
+      ],
+      "categories": [
+        "Retro",
+        "Mechanical"
+      ],
+      "price": 89.99,
+      "description": "Experience the charm of a bygone era with this retro mechanical watch.",
+      "reviews": []
+    },
+    {
+      "id": 19,
+      "title": "Swiss Made Luxury Watch",
+      "images": [
+        "https://example.com/watch19.jpg"
+      ],
+      "categories": [
+        "Luxury",
+        "Swiss Made"
+      ],
+      "price": 349.99,
+      "description": "Indulge in luxury with this Swiss-made timepiece crafted with precision.",
+      "reviews": []
+    },
+    {
+      "id": 20,
+      "title": "Stylish Mesh Strap Watch",
+      "images": [
+        "https://example.com/watch20.jpg"
+      ],
+      "categories": [
+        "Stylish",
+        "Mesh Strap"
+      ],
+      "price": 59.99,
+      "description": "Make a style statement with this stylish mesh strap watch.",
+      "reviews": []
+    },
+    {
+      "id": 21,
+      "title": "GPS Navigation Smartwatch",
+      "images": [
+        "https://example.com/watch21.jpg"
+      ],
+      "categories": [
+        "GPS Navigation",
+        "Smartwatch"
+      ],
+      "price": 179.99,
+      "description": "Navigate with ease using the GPS feature of this smartwatch.",
+      "reviews": []
+    },
+    {
+      "id": 22,
+      "title": "Art Deco Inspired Watch",
+      "images": [
+        "https://example.com/watch22.jpg"
+      ],
+      "categories": [
+        "Art Deco Inspired"
+      ],
+      "price": 99.99,
+      "description": "Channel the elegance of the Art Deco era with this inspired watch.",
+      "reviews": []
+    },
+    {
+      "id": 23,
+      "title": "Trendy Neon-colored Watch",
+      "images": [
+        "https://example.com/watch23.jpg"
+      ],
+      "categories": [
+        "Trendy",
+        "Neon-colored"
+      ],
+      "price": 54.99,
+      "description": "Stay on-trend with this vibrant neon-colored watch.",
+      "reviews": []
+    },
+    {
+      "id": 24,
+      "title": "Diamond-studded Luxury Watch",
+      "images": [
+        "https://example.com/watch24.jpg"
+      ],
+      "categories": [
+        "Luxury",
+        "Diamond-studded"
+      ],
+      "price": 499.99,
+      "description": "Indulge in opulence with this diamond-studded luxury watch.",
+      "reviews": []
+    },
+    {
+      "id": 25,
+      "title": "Classic Wood Grain Watch",
+      "images": [
+        "https://example.com/watch25.jpg"
+      ],
+      "categories": [
+        "Classic",
+        "Wood Grain"
+      ],
+      "price": 79.99,
+      "description": "Blend nature and style with this classic wood grain watch.",
+      "reviews": []
+    },
+    {
+      "id": 26,
+      "title": "Military Camouflage Watch",
+      "images": [
+        "https://example.com/watch26.jpg"
+      ],
+      "categories": [
+        "Military",
+        "Camouflage"
+      ],
+      "price": 64.99,
+      "description": "Show your bold style with this military camouflage-inspired watch.",
+      "reviews": []
+    },
+    {
+      "id": 27,
+      "title": "Smart Fitness Tracker Watch",
+      "images": [
+        "https://example.com/watch27.jpg"
+      ],
+      "categories": [
+        "Smart",
+        "Fitness Tracker"
+      ],
+      "price": 129.99,
+      "description": "Track your fitness goals and stay connected with this smart fitness tracker watch.",
+      "reviews": []
+    },
+    {
+      "id": 28,
+      "title": "Antique Brass Pocket Watch",
+      "images": [
+        "https://example.com/watch28.jpg"
+      ],
+      "categories": [
+        "Antique",
+        "Brass",
+        "Pocket Watch"
+      ],
+      "price": 89.99,
+      "description": "Embrace the vintage charm with this antique brass pocket watch.",
+      "reviews": []
+    },
+    {
+      "id": 29,
+      "title": "Modern Geometric Design Watch",
+      "images": [
+        "https://example.com/watch29.jpg"
+      ],
+      "categories": [
+        "Modern",
+        "Geometric Design"
+      ],
+      "price": 74.99,
+      "description": "Stand out with the modern geometric design of this unique watch.",
+      "reviews": []
+    },
+    {
+      "id": 30,
+      "title": "Solar-Powered Eco-Friendly Watch",
+      "images": [
+        "https://example.com/watch30.jpg"
+      ],
+      "categories": [
+        "Solar-Powered",
+        "Eco-Friendly"
+      ],
+      "price": 109.99,
+      "description": "Go green with this solar-powered and eco-friendly watch.",
+      "reviews": []
+    }
+  ]
+}

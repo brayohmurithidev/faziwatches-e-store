@@ -24,12 +24,12 @@ const ProductDrawer = (props) => {
       open={props.open}
       sx={{
         width: drawerWidth,
-        backgroundColor: "var(--primary-color)",
+        backgroundColor: "var(--background-color)",
         flexShrink: 0,
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
-          // backgroundColor: "var(--primary-color)",
+          // backgroundColor: "var(--background-color)",
           // color: "var(--white-color)",
         },
       }}
@@ -41,7 +41,7 @@ const ProductDrawer = (props) => {
           <ProductImage />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Typography variant="body1">STYLE ID: RMA2031</Typography>
+          <Typography variant="body1">PRODUCT ID: RMA2031</Typography>
           <Typography variant="h4" sx={{ fontWeight: 700 }}>
             SOLITAIRE ENGAGEMENT RINGS PLATINUM
           </Typography>
@@ -63,7 +63,7 @@ const ProductDrawer = (props) => {
               <strike>$5000 </strike>
               <span
                 style={{
-                  backgroundColor: "var(--desertSand-color)",
+                  backgroundColor: "var(--primary-color)",
                   fontSize: "10px",
                   padding: "3px 5px",
                 }}
@@ -78,6 +78,7 @@ const ProductDrawer = (props) => {
               fullWidth
               size="large"
               variant="contained"
+              sx={{ backgroundColor: "var(--primary-color)" }}
               startIcon={<AddShoppingCartSharp />}
               className="btn"
             >

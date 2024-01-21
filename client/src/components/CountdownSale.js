@@ -40,8 +40,6 @@ const CountdownSale = () => {
           <Button
             className="btn"
             sx={{
-              backgroundColor: "var(--desertSand-color)",
-              color: "var(--white-color)",
               marginTop: " 20px",
             }}
             variant="contained"
