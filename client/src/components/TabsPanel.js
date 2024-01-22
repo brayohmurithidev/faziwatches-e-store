@@ -22,7 +22,9 @@ const TabsPanel = (props) => {
           ))}
         </Tabs>
         {props.content?.map((item, index) => (
-          <TabPanel value={item.tabName}>{item.tabContent}</TabPanel>
+          <TabPanel key={index} value={item.tabName}>
+            {item.tabContent}
+          </TabPanel>
         ))}
       </TabContext>
     </>

@@ -28,7 +28,7 @@ const LandingPage = (props) => {
 
   // SEPARATE BEST SELLING AND FEATURED
   const bestSelling = products.filter((prod) =>
-    prod.tags?.includes("Best Selling"),
+    prod.categories?.includes("Watches"),
   );
   const featured = products.filter((prod) => prod.tags?.includes("Featured"));
 
@@ -76,27 +76,9 @@ const LandingPage = (props) => {
       <div className="best-selling-section section">
         <div className="title-wrapper">
           <h3>BEST SELLERS</h3>
-          {/*<FormControl*/}
-          {/*  variant="standard"*/}
-          {/*  sx={{ m: 1, width: 50, height: 50 }}*/}
-          {/*  size="small"*/}
-          {/*>*/}
-          {/*  <Select*/}
-          {/*    value={productCategory}*/}
-          {/*    onChange={(e) => setProductCategory(e.target.value)}*/}
-          {/*  >*/}
-          {/*    <MenuItem value="">*/}
-          {/*      <em>None</em>*/}
-          {/*    </MenuItem>*/}
-          {/*    {productCategories.splice(2, 6).map((cat, index) => (*/}
-          {/*      <MenuItem value={cat}>{cat}</MenuItem>*/}
-          {/*    ))}*/}
-          {/*  </Select>*/}
-          {/*</FormControl>*/}
-
           <div className="categories-sort">
             <ul>
-              {productCategories?.splice(2, 6)?.map((cat, index) => (
+              {productCategories?.map((cat, index) => (
                 <li key={index}>
                   <p
                     style={{
@@ -133,7 +115,7 @@ const LandingPage = (props) => {
             bestSelling
               .filter((prod) => prod.categories?.includes(productCategory))
               .map((prod, index) => (
-                <Grid key={index} xs={6} md={4} lg={2} item>
+                <Grid key={index} xs={12} sm={6} md={4} lg={3} xl={2} item>
                   <ProductGridItem product={prod} />
                 </Grid>
               ))
@@ -148,7 +130,12 @@ const LandingPage = (props) => {
         <div className="title-wrapper">
           <h3>FEATURED PRODUCTS</h3>
         </div>
-        <Grid container rowGap={2} sx={{ height: "100%", marginTop: "30px" }}>
+        <Grid
+          container
+          spacing={2}
+          rowGap={2}
+          sx={{ height: "100%", marginTop: "30px" }}
+        >
           <Grid
             item
             className="clearance-sale"
@@ -167,7 +154,7 @@ const LandingPage = (props) => {
           <Grid item xs={12} md={8}>
             <Grid container spacing={2}>
               {featured.map((prod, index) => (
-                <Grid key={index} xs={6} md={4} lg={3} item>
+                <Grid key={index} xs={12} sm={6} md={4} xl={3} item>
                   <ProductGridItem product={prod} />
                 </Grid>
               ))}

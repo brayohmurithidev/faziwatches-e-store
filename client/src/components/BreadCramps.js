@@ -1,10 +1,8 @@
 import * as React from 'react';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import {useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     event.preventDefault();
@@ -13,37 +11,35 @@ function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
 
 export default function BreadCramps() {
     const location = useLocation()
-    console.log(location)
+    console.log(location.pathname)
 
+    let currentLink = ''
 
-    const breadcrumbs = [
-        <Link underline="hover" key="1" color="inherit" href="/" onClick={handleClick}>
-            MUI
-        </Link>,
-        <Link
-            underline="hover"
-            key="2"
-            color="inherit"
-            href="/material-ui/getting-started/installation/"
-            onClick={handleClick}
-        >
-            Core
-        </Link>,
-        <Typography key="3" color="#333">
-            Breadcrumb
-        </Typography>,
-    ];
+    const crumps = location.pathname.split('/').filter(cramp => cramp !== '').map((cramp, index) => {
+        currentLink += `/${cramp}`
+        console.log(currentLink)
+
+        return (
+            <div className='cramp' style={{color: "#fff",}} key={index}>
+                <Link style={{color: "#fff", textDecoration: 'underline var(--primary-color)'}}
+                      to={currentLink}>{cramp}</Link>
+            </div>
+        )
+    })
+
 
     return (
-        <Stack spacing={2}>
+        <Stack spacing={2} sx={{marginLeft: '20px', marginBottom: '20px'}}>
             <Breadcrumbs
-                sx={{color: '#fff'}}
+                sx={{color: '#fff',}}
                 separator={<NavigateNextIcon fontSize="small"/>}
                 aria-label="breadcrumb"
             >
-                {breadcrumbs}
+                {crumps}
             </Breadcrumbs>
         </Stack>
+
+        // <div className='breadcrumps'>{crumps}</div>
     );
 }
 

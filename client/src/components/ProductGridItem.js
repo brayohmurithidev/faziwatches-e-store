@@ -3,17 +3,18 @@ import { Box, Button, IconButton, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 // IMAGES IMPORT
-import img1 from "../assets/images/black_men_watch.png";
+import img1 from "../assets/images/2.png";
 import { AddShoppingCart, FavoriteBorder } from "@mui/icons-material";
 
 const ProductGridItem = ({ product }) => {
   return (
     <Paper elevation={3} className="product-item-wrapper">
-      <Link to={`/product/${product?.id}`}>
+      <Link to={`/products/${product?.id}`}>
         <Box
+          className="product-item-image"
           sx={{
-            backgroundImage: `url(${img1})`,
-            height: "60%",
+            backgroundImage: `url(${product?.images[0]})`,
+            height: "200px",
             backgroundPosition: "50%",
             backgroundRepeat: "no-repeat",
             backgroundColor: "rgb(255, 255, 255)",
@@ -23,7 +24,7 @@ const ProductGridItem = ({ product }) => {
         ></Box>
         <Box
           sx={{
-            height: "40%",
+            // height: "45%",
             position: "relative",
             display: "flex",
             flexDirection: "column",
@@ -34,9 +35,17 @@ const ProductGridItem = ({ product }) => {
             gap: "0.1rem",
           }}
         >
-          <Typography>Classic Analog Watch</Typography>
+          <Typography
+            sx={{ fontSize: "12px", textAlign: "center", color: "#333" }}
+          >
+            {product?.categories?.toString()}
+            {/*{product?.categories.map((cat, index) => (*/}
+            {/*  <span key={index}>{cat} </span>*/}
+            {/*))}*/}
+          </Typography>
+          <Typography>{product?.title}</Typography>
           <Typography sx={{ color: "var(--primary-color)" }}>
-            Ksh. 3,150
+            ${product?.price}
           </Typography>
           {/*Price before*/}
           <Typography sx={{ fontSize: "12px" }}>

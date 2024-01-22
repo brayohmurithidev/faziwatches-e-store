@@ -12,6 +12,7 @@ import About from "./pages/About";
 import Shop, { shopLoader } from "./pages/Shop";
 import Product, { productLoader } from "./pages/Product";
 import PagesLayout from "./layouts/PagesLayout";
+import Cart from "./pages/Cart";
 
 function App() {
   const router = createBrowserRouter(
@@ -20,12 +21,18 @@ function App() {
         <Route path="/" loader={landingLoader} element={<LandingPage />} />
         <Route element={<PagesLayout />}>
           <Route path="/about" element={<About />} />
-          <Route
-            path="/product/:id"
-            loader={productLoader}
-            element={<Product />}
-          />
-          <Route path="/shop" element={<Shop />} loader={shopLoader} />
+
+          {/*  PRODUCTS ROUTES*/}
+          <Route path="/products">
+            <Route index element={<Shop />} loader={shopLoader} />
+            <Route
+              path=":categories?/:id"
+              loader={productLoader}
+              element={<Product />}
+            />
+          </Route>
+
+          <Route path="/cart" element={<Cart />} />
         </Route>
       </Route>,
     ),

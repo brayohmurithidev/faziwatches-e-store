@@ -7,11 +7,9 @@ const HeroSection = () => {
     <div className="hero-section">
       <div className="hero-wrapper">
         <div className="hero-section-content">
-          <h1>
-            GRAND <br /> SALE
-          </h1>
+          <h1>GRAND SALE</h1>
           <h5>__ UP TO 40% OFF __</h5>
-          <Link to="/shop">
+          <Link to="/products">
             <Button
               className="btn"
               variant="contained"

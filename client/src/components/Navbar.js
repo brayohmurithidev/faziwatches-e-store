@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, IconButton, ListItem, ListItemText } from "@mui/material";
 import { Menu } from "@mui/icons-material";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import CounterIcon from "./CounterIcon";
 import SearchForm from "./SearchForm";
 

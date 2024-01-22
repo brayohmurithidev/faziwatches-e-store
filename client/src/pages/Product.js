@@ -17,10 +17,9 @@ const tabsContent = [
 
 const Product = () => {
   const [product] = useLoaderData();
-  console.log(product.categories);
 
   const productDesc = [
-    { tabName: "Description", tabContent: product.description },
+    { tabName: "Description", tabContent: product?.description },
     { tabName: "Reviews (0)", tabContent: "Reviews" },
   ];
 
@@ -33,7 +32,7 @@ const Product = () => {
           <ProductImage images={product?.images} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Typography variant="body1">PRODUCT ID: RMA2031</Typography>
+          <Typography variant="body1">PRODUCT ID: {product?.id}</Typography>
           <Typography variant="h4" sx={{ fontWeight: 700 }}>
             {product?.title}
           </Typography>
@@ -44,7 +43,9 @@ const Product = () => {
           >
             {product?.categories?.join(", ")}
           </Typography>
-          <Rating name="read-only" value={product?.rating} readOnly />
+          {product?.rating >= 1 && (
+            <Rating name="read-only" value={product?.rating} readOnly />
+          )}
           <div
             style={{
               padding: "10px 0",

@@ -22,7 +22,7 @@ const menus = [
   {
     name: "Shop",
     icon: <Shop />,
-    url: "/shop",
+    url: "/products",
   },
 ];
 
