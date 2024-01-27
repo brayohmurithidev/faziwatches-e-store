@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Grid, Rating, Typography } from "@mui/material";
 import ProductImage from "../components/ProductImage";
 import TabsPanel from "../components/TabsPanel";
@@ -8,6 +8,8 @@ import ProductGridItem from "../components/ProductGridItem";
 import Increment from "../components/Increment";
 import { useLoaderData, useLocation } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { CART_ADD_ITEM, getCart } from "../features/cart/cartSlice";
 
 const tabsContent = [
   { tabName: "color", tabContent: "My colors" },
@@ -16,12 +18,35 @@ const tabsContent = [
 ];
 
 const Product = () => {
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [product] = useLoaderData();
+  const dispatch = useDispatch();
+  const items = useSelector(getCart);
 
   const productDesc = [
     { tabName: "Description", tabContent: product?.description },
     { tabName: "Reviews (0)", tabContent: "Reviews" },
   ];
+
+  useEffect(() => {
+    if (items.find((item) => item.id === product.id)) {
+      setIsAddedToCart(true);
+    }
+  }, [product]);
+
+  // HANDLE ADD TO CART
+  const handleAddToCart = (prod) => {
+    dispatch(
+      CART_ADD_ITEM({
+        id: prod.id,
+        image: prod.images[0],
+        title: prod.title,
+        price: prod.price,
+        count: 1,
+      }),
+    );
+    setIsAddedToCart(true);
+  };
 
   return (
     <Box
@@ -74,11 +99,19 @@ const Product = () => {
           </div>
           <TabsPanel content={tabsContent} />
           <div style={{ width: "80%", margin: "10px auto" }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={4}>
-                <Increment />
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs={2}>
+                <div
+                  style={
+                    !isAddedToCart ? { display: "none" } : { display: "block" }
+                  }
+                >
+                  <Increment
+                    product={items.find((item) => item.id === product.id)}
+                  />
+                </div>
               </Grid>
-              <Grid item xs={12} sm={8}>
+              <Grid item xs={10}>
                 {" "}
                 <Button
                   fullWidth
@@ -87,6 +120,8 @@ const Product = () => {
                   sx={{ backgroundColor: "var(--primary-color)" }}
                   startIcon={<AddShoppingCartSharp />}
                   className="btn"
+                  onClick={() => handleAddToCart(product)}
+                  disabled={!!isAddedToCart}
                 >
                   ADD TO CART
                 </Button>
@@ -127,6 +162,9 @@ export default Product;
 export const productLoader = async ({ params }) => {
   const { id } = params;
   const res = await axios.get(`http://localhost:4000/products?id=${id}`);
+  if (res?.data?.length === 0) {
+    throw new Response("Product not available", { status: 404 });
+  }
 
   return res.data;
 };

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, json } from "react-router-dom";
 import {
+  Box,
   FormControl,
   Grid,
   InputLabel,
@@ -43,32 +44,35 @@ const Shop = () => {
     <div className="shop-wrapper">
       {/*FILTERS*/}
       <div className="product-filters">
-        <p className="product-results">Showing {sorted.length} results</p>
-
-        {/*<div className="filter-select">*/}
-        <FormControl variant="standard">
-          <InputLabel sx={{ color: "#fff" }} id="sort">
-            Sort By
-          </InputLabel>
-          <Select
-            labelId="sort"
-            label="Sort By"
-            value={sort}
-            onChange={handleSort}
+        <Box sx={{ display: "flex", alignItems: "end" }}>
+          <p className="product-results">Showing {sorted.length} results</p>
+          <FormControl
+            variant="standard"
+            sx={{ m: 1, minWidth: 120 }}
+            size="small"
           >
-            <MenuItem value="defaultSorting">Default Sorting</MenuItem>
-            <ListSubheader>Price</ListSubheader>
-            <MenuItem value="min">Min</MenuItem>
-            <MenuItem value="max">Max</MenuItem>
-            <ListSubheader>Categories</ListSubheader>
-            {categories?.map((cat, index) => (
-              <MenuItem key={index} value={cat}>
-                {cat}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        {/*</div>*/}
+            <InputLabel sx={{ color: "#fff" }} id="sort">
+              Sort By
+            </InputLabel>
+            <Select
+              labelId="sort"
+              label="Sort By"
+              value={sort}
+              onChange={handleSort}
+            >
+              <MenuItem value="defaultSorting">Default Sorting</MenuItem>
+              <ListSubheader>Price</ListSubheader>
+              <MenuItem value="min">Min</MenuItem>
+              <MenuItem value="max">Max</MenuItem>
+              <ListSubheader>Categories</ListSubheader>
+              {categories?.map((cat, index) => (
+                <MenuItem key={index} value={cat}>
+                  {cat}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
       </div>
       <Grid container spacing={2} rowGap={2} sx={{ padding: "15px" }}>
         {sorted.map((product, index) => (
@@ -84,6 +88,10 @@ const Shop = () => {
 export default Shop;
 
 export const shopLoader = async () => {
-  const res = await axios.get("http://localhost:4000/products");
-  return res.data;
+  try {
+    const res = await axios.get("http://localhost:4000/products");
+    return res.data;
+  } catch (err) {
+    throw err;
+  }
 };

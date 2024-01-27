@@ -2,7 +2,6 @@ import "./App.css";
 import MainLayout from "./layouts/MainLayout";
 import {
   Route,
-  Routes,
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
@@ -13,6 +12,9 @@ import Shop, { shopLoader } from "./pages/Shop";
 import Product, { productLoader } from "./pages/Product";
 import PagesLayout from "./layouts/PagesLayout";
 import Cart from "./pages/Cart";
+import NotFound from "./pages/NotFound";
+import ErrorHandler from "./components/ErrorHandler";
+import * as React from "react";
 
 function App() {
   const router = createBrowserRouter(
@@ -23,7 +25,7 @@ function App() {
           <Route path="/about" element={<About />} />
 
           {/*  PRODUCTS ROUTES*/}
-          <Route path="/products">
+          <Route path="/products" errorElement={<ErrorHandler />}>
             <Route index element={<Shop />} loader={shopLoader} />
             <Route
               path=":categories?/:id"
@@ -34,6 +36,7 @@ function App() {
 
           <Route path="/cart" element={<Cart />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Route>,
     ),
   );

@@ -1,44 +1,28 @@
 import React, { useState } from "react";
 import { Box, Grid, IconButton, Input } from "@mui/material";
-import { Add, Remove } from "@mui/icons-material";
+import { Add, ArrowDropDown, ArrowDropUp, Remove } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import { ITEM_DECREMENT, ITEM_INCREMENT } from "../features/cart/cartSlice";
 
-const Increment = () => {
-  const [value, setValue] = useState(0);
+const Increment = ({ product }) => {
+  const [value, setValue] = useState(product?.count);
+  const dispatch = useDispatch();
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center" }}>
-      <Grid container spacing={1}>
-        <Grid item xs={4}>
-          <IconButton
-            onClick={() =>
-              value === 0 ? setValue(value) : setValue(parseInt(value) - 1)
-            }
-          >
-            <Remove sx={{ color: "#fff" }} />
-          </IconButton>
-        </Grid>{" "}
-        <Grid item xs={4}>
-          {" "}
-          <Input
-            sx={{
-              backgroundColor: "#fff",
-              boxSizing: "border-box",
-              border: "none",
-              textAlign: "center",
-            }}
-            size="small"
-            onChange={(e) => setValue(e.target.value)}
-            type="number"
-            value={value}
-          />
-        </Grid>
-        <Grid item xs={4}>
-          <IconButton onClick={() => setValue(parseInt(value) + 1)}>
-            <Add sx={{ color: "#fff" }} />
-          </IconButton>
-        </Grid>
-      </Grid>
-    </Box>
+    <div className="item-counter">
+      <IconButton onClick={() => dispatch(ITEM_INCREMENT(product.id))}>
+        <ArrowDropUp />
+      </IconButton>
+
+      <p>{product.count}</p>
+      <IconButton
+        onClick={() =>
+          product.count === 1 ? null : dispatch(ITEM_DECREMENT(product.id))
+        }
+      >
+        <ArrowDropDown />
+      </IconButton>
+    </div>
   );
 };
 
