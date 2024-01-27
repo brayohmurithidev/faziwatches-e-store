@@ -45,7 +45,7 @@ const Cart = () => {
       (total, item) => total + item.price * item.count,
       0,
     );
-    setTotal(Math.round((total * 100) / 100).toFixed(2));
+    setTotal(total.toFixed(2));
   }, [items]);
 
   return (

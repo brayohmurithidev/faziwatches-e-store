@@ -145,6 +145,12 @@ a {
         position: absolute;
         color: #000000;
         padding: 2px 3px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
         border-radius: 100%;
         font-size: 12px;
         background-color: var(--primary-color);

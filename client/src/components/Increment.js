@@ -14,10 +14,10 @@ const Increment = ({ product }) => {
         <ArrowDropUp />
       </IconButton>
 
-      <p>{product.count}</p>
+      <p>{product?.count}</p>
       <IconButton
         onClick={() =>
-          product.count === 1 ? null : dispatch(ITEM_DECREMENT(product.id))
+          product?.count === 1 ? null : dispatch(ITEM_DECREMENT(product.id))
         }
       >
         <ArrowDropDown />
