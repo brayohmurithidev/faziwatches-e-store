@@ -1,5 +1,4 @@
 import React from "react";
-import CounterIcon from "./CounterIcon";
 import { Box, Typography } from "@mui/material";
 import SearchForm from "./SearchForm";
 

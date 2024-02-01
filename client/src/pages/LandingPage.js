@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeroSection from "../components/HeroSection";
 import { Box, Grid, ImageList, ImageListItem } from "@mui/material";
 import HeroCard from "../components/HeroCard";
@@ -20,20 +20,23 @@ import { useLoaderData } from "react-router-dom";
 
 // const productCategories = ["Watches", "Men", "Ladies", "Smart Watches"];
 
-const days = 2;
-
 const LandingPage = (props) => {
-  const products = useLoaderData();
+  const data = useLoaderData().data;
+  console.log(data.filter((prod) => prod.isFeatured === true));
+  const products = data;
   const [productCategory, setProductCategory] = useState("Watches");
 
   // SEPARATE BEST SELLING AND FEATURED
   const bestSelling = products.filter((prod) =>
     prod.categories?.includes("Watches"),
   );
-  const featured = products.filter((prod) => prod.tags?.includes("Featured"));
+  const featured = products.filter((prod) => prod.isFeatured === true);
 
   const prodCategories = bestSelling.map((b) => b.categories);
   const productCategories = [...new Set(prodCategories.flat())];
+
+  // USE EFFECTS
+  // setProducts(useLoaderData().data);
 
   return (
     <>
@@ -194,7 +197,7 @@ const LandingPage = (props) => {
 export default LandingPage;
 
 export const landingLoader = async () => {
-  const res = await axios.get("http://localhost:4000/products");
+  const res = await axios.get("http://localhost:8000/api/products");
 
   return res.data;
 };

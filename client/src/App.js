@@ -5,6 +5,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
+  useSearchParams,
 } from "react-router-dom";
 import LandingPage, { landingLoader } from "./pages/LandingPage";
 import About from "./pages/About";
@@ -26,7 +27,11 @@ function App() {
 
           {/*  PRODUCTS ROUTES*/}
           <Route path="/products" errorElement={<ErrorHandler />}>
-            <Route index element={<Shop />} loader={shopLoader} />
+            <Route
+              index
+              element={<Shop />}
+              loader={({ request }) => shopLoader(request)}
+            />
             <Route
               path=":categories?/:id"
               loader={productLoader}

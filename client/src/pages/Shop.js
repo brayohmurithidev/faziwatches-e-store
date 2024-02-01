@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useLoaderData, json } from "react-router-dom";
+import { useLoaderData, useSearchParams } from "react-router-dom";
 import {
   Box,
   FormControl,
@@ -13,9 +13,12 @@ import {
 import ProductGridItem from "../components/ProductGridItem";
 
 const Shop = () => {
-  const products = useLoaderData();
+  let products = useLoaderData();
   const [sort, setSort] = useState("");
   const [sorted, setSorted] = useState(products);
+
+  // GET SEARCH PARAMS
+  const search = new URL(document.location).searchParams.get("search");
 
   // EXTRACT CATEGORIES
   const categories = [
@@ -27,10 +30,31 @@ const Shop = () => {
   };
 
   useEffect(() => {
+    const fetchprod = async () => {
+      try {
+        const res = await axios.get(
+          search
+            ? `http://localhost:8000/api/products?search=${search}`
+            : `http://localhost:8000/api/products`,
+        );
+        products = res.data.data;
+      } catch (err) {
+        throw err;
+      }
+    };
+
+    fetchprod();
+  }, [search]);
+
+  useEffect(() => {
     if (sort === "min") {
-      setSorted([...products.sort((a, b) => a.price - b.price)]);
+      setSorted([
+        ...products.sort((a, b) => a.price.regular - b.price.regular),
+      ]);
     } else if (sort === "max") {
-      setSorted([...products.sort((a, b) => b.price - a.price)]);
+      setSorted([
+        ...products.sort((a, b) => b.price.regular - a.price.regular),
+      ]);
     } else if (sorted === "") {
       setSorted(products);
     } else if (categories.includes(sort)) {
@@ -38,7 +62,7 @@ const Shop = () => {
         ...products?.filter((prod) => prod?.categories?.includes(sort)),
       ]);
     }
-  }, [sort]);
+  }, [sort, sorted, products]);
 
   return (
     <div className="shop-wrapper">
@@ -87,10 +111,17 @@ const Shop = () => {
 
 export default Shop;
 
-export const shopLoader = async () => {
+export const shopLoader = async (request) => {
+  const params = new URL(request.url).searchParams;
+  const search = params?.get("search");
+
   try {
-    const res = await axios.get("http://localhost:4000/products");
-    return res.data;
+    const res = await axios.get(
+      search
+        ? `http://localhost:8000/api/products?search=${search}`
+        : `http://localhost:8000/api/products`,
+    );
+    return res.data.data;
   } catch (err) {
     throw err;
   }

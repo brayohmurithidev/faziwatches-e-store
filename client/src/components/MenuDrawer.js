@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Drawer, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { Drawer, ListItem } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 const MenuDrawer = ({ open, setOpen, menus }) => {

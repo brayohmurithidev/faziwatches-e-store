@@ -10,8 +10,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { ArrowDropDown, ArrowDropUp, Clear } from "@mui/icons-material";
-import img1 from "../assets/images/2.png";
+import { Clear } from "@mui/icons-material";
 import { Form, Link } from "react-router-dom";
 
 // payments icons
@@ -22,7 +21,6 @@ import paypal from "../assets/icons/paypal.png";
 import Increment from "../components/Increment";
 import { useDispatch, useSelector } from "react-redux";
 import { CART_DELETE_ITEM, getCart } from "../features/cart/cartSlice";
-import product from "./Product";
 
 const payments = [mpesa, visa, paypal, mastercard];
 
@@ -55,31 +53,35 @@ const Cart = () => {
           <div className="cart-items-main">
             <h1>Checkout</h1>
             <Divider sx={{ backgroundColor: "#333" }} />
-            <div className="cart-items-wrapper">
-              {items.map((item, index) => (
-                <div className="cart-item" key={index}>
-                  <div className="cart-img-text">
-                    <div
-                      className="item-image"
-                      style={{ backgroundImage: `url(${item.image})` }}
-                    ></div>
-                    <div className="item-content">
-                      <h3 className="item-title">{item.title}</h3>
-                      <p className="item-price">${item.price}</p>
+            {items.length === 0 ? (
+              <div>You haven't added anything </div>
+            ) : (
+              <div className="cart-items-wrapper">
+                {items.map((item, index) => (
+                  <div className="cart-item" key={index}>
+                    <div className="cart-img-text">
+                      <div
+                        className="item-image"
+                        style={{ backgroundImage: `url(${item.image})` }}
+                      ></div>
+                      <div className="item-content">
+                        <h3 className="item-title">{item.productName}</h3>
+                        <p className="item-price">${item.price}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="item-action">
-                    <Increment product={item} />
+                    <div className="item-action">
+                      <Increment product={item} />
 
-                    <div className="item-delete">
-                      <IconButton onClick={() => handleDelete(item.id)}>
-                        <Clear sx={{ color: "red" }} />
-                      </IconButton>
+                      <div className="item-delete">
+                        <IconButton onClick={() => handleDelete(item.id)}>
+                          <Clear sx={{ color: "red" }} />
+                        </IconButton>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
             <div className="back-to-shopping">
               <Link to="/products">
                 <Button className="cart-btn">Continue Shopping</Button>
@@ -130,6 +132,7 @@ const Cart = () => {
                 }}
                 variant="contained"
                 fullWidth
+                disabled={total === "0.00"}
               >
                 Checkout (${total})
               </Button>

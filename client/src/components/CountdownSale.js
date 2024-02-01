@@ -40,10 +40,12 @@ const CountdownSale = () => {
     <div className="countdown-sale section">
       <div className="countdown-sale-content">
         <div>
-          <h1>
-            <span style={{ fontSize: "12px" }}>SALE UP TO 15% OFF</span>
-            PLATINUM DESIGN
-          </h1>
+          <h1>PLATINUM DESIGN</h1>
+          <p>
+            <span style={{ fontSize: "12px", color: "var(--primary-color)" }}>
+              SALE UP TO 15% OFF
+            </span>
+          </p>
           <p>Give yourself a more vibrant look </p>
           <div
             style={{

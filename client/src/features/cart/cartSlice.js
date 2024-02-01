@@ -2,36 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import img1 from "../../assets/images/2.png";
 
 const initialState = {
-  cart: [
-    {
-      id: 1,
-      image: img1,
-      title: "Super Golden Watch- 1",
-      price: 120,
-      count: 2,
-    },
-    {
-      id: 2,
-      image: img1,
-      title: "Super Golden Watch - 2",
-      price: 120,
-      count: 2,
-    },
-    {
-      id: 3,
-      image: img1,
-      title: "Super Golden Watch - 3",
-      price: 120,
-      count: 2,
-    },
-    {
-      id: 4,
-      image: img1,
-      title: "Super Golden Watch - 4",
-      price: 120,
-      count: 2,
-    },
-  ],
+  cart: [],
 };
 
 //declare slice

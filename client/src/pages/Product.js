@@ -3,10 +3,9 @@ import { Box, Button, Grid, Rating, Typography } from "@mui/material";
 import ProductImage from "../components/ProductImage";
 import TabsPanel from "../components/TabsPanel";
 import { AddShoppingCartSharp } from "@mui/icons-material";
-import { products } from "../utils/products";
-import ProductGridItem from "../components/ProductGridItem";
+// import ProductGridItem from "../components/ProductGridItem";
 import Increment from "../components/Increment";
-import { useLoaderData, useLocation } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { CART_ADD_ITEM, getCart } from "../features/cart/cartSlice";
@@ -19,7 +18,8 @@ const tabsContent = [
 
 const Product = () => {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
-  const [product] = useLoaderData();
+  const product = useLoaderData().data;
+  console.log(product);
   const dispatch = useDispatch();
   const items = useSelector(getCart);
 
@@ -32,7 +32,7 @@ const Product = () => {
     if (items.find((item) => item.id === product.id)) {
       setIsAddedToCart(true);
     }
-  }, [product]);
+  }, [product, items]);
 
   // HANDLE ADD TO CART
   const handleAddToCart = (prod) => {
@@ -40,8 +40,8 @@ const Product = () => {
       CART_ADD_ITEM({
         id: prod.id,
         image: prod.images[0],
-        title: prod.title,
-        price: prod.price,
+        productName: prod.productName,
+        price: prod.price.regular,
         count: 1,
       }),
     );
@@ -59,7 +59,7 @@ const Product = () => {
         <Grid item xs={12} md={6}>
           <Typography variant="body1">PRODUCT ID: {product?.id}</Typography>
           <Typography variant="h4" sx={{ fontWeight: 700 }}>
-            {product?.title}
+            {product?.productName}
           </Typography>
           {/*{product?.categories?.map(category)}*/}
           <Typography
@@ -79,23 +79,25 @@ const Product = () => {
             }}
           >
             <Typography variant="h5" sx={{ fontWeight: 600 }}>
-              ${product?.price}
+              ${product?.price.regular}
             </Typography>
-            <Typography
-              variant="h6"
-              sx={{ display: "flex", alignItems: "center", gap: "10px" }}
-            >
-              <strike>$5000 </strike>
-              <span
-                style={{
-                  backgroundColor: "var(--primary-color)",
-                  fontSize: "10px",
-                  padding: "3px 5px",
-                }}
+            {product?.price?.discounted && (
+              <Typography
+                variant="h6"
+                sx={{ display: "flex", alignItems: "center", gap: "10px" }}
               >
-                -20% OFF
-              </span>
-            </Typography>
+                <strike>${product?.price?.discounted} </strike>
+                <span
+                  style={{
+                    backgroundColor: "var(--primary-color)",
+                    fontSize: "10px",
+                    padding: "3px 5px",
+                  }}
+                >
+                  -20% OFF
+                </span>
+              </Typography>
+            )}
           </div>
           <TabsPanel content={tabsContent} />
           <div style={{ width: "80%", margin: "10px auto" }}>
@@ -107,7 +109,7 @@ const Product = () => {
                   }
                 >
                   <Increment
-                    product={items.find((item) => item.id === product.id)}
+                    product={items.find((item) => item._id === product._id)}
                   />
                 </div>
               </Grid>
@@ -146,11 +148,11 @@ const Product = () => {
             justifyContent: { md: "left", xs: "center" },
           }}
         >
-          {products.map((prod, index) => (
-            <Grid key={index} xs={6} sm={4} md={3} xl={2} item>
-              <ProductGridItem product={prod} />
-            </Grid>
-          ))}
+          {/*{products.map((prod, index) => (*/}
+          {/*  <Grid key={index} xs={6} sm={4} md={3} xl={2} item>*/}
+          {/*    <ProductGridItem product={prod} />*/}
+          {/*  </Grid>*/}
+          {/*))}*/}
         </Grid>
       </div>
     </Box>
@@ -161,8 +163,8 @@ export default Product;
 
 export const productLoader = async ({ params }) => {
   const { id } = params;
-  const res = await axios.get(`http://localhost:4000/products?id=${id}`);
-  if (res?.data?.length === 0) {
+  const res = await axios.get(`http://localhost:8000/api/products/${id}`);
+  if (!res) {
     throw new Response("Product not available", { status: 404 });
   }
 

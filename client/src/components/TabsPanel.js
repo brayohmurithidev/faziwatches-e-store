@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Tab, Tabs } from "@mui/material";
-import { TabContext, TabList, TabPanel } from "@mui/lab";
+import { TabContext, TabPanel } from "@mui/lab";
 
 const TabsPanel = (props) => {
   const [value, setValue] = useState(props?.content[0]?.tabName);
