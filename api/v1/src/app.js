@@ -7,18 +7,24 @@ dotenv.config();
 
 // IMPORT ROUTES
 import "./db/db.config.js";
-import indexRoute from "./routes/index.js";
+import cookieParser from "cookie-parser";
 import productsRoute from "./routes/products.route.js";
+import userRoute from "./routes/user.route.js";
+import authRoute from "./routes/auth.route.js";
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
 // Middlewares goes here
 app.use(cors());
-app.use(bodyParser({ extended: false }));
+app.use(cookieParser());
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); //enough to work
 
 // Routes goes here
 app.use("/api/products", productsRoute);
+app.use("/api/users", userRoute);
+app.use("/api/auth", authRoute);
 
 //run the app
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
