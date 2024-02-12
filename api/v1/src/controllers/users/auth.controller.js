@@ -24,7 +24,7 @@ export const login = async (req, res) => {
         );
     }
     if (!bcrypt.compareSync(data.password, user.password)) {
-      return res.status(401).send(APIResponse(null, 401, Error("Unauthorize")));
+      return res.status(401).send(APIResponse(null, 401, "Wrong Password"));
     }
     const userData = {
       _id: user._id,
