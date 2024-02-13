@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import img1 from "../../assets/images/2.png";
 
 const initialState = {
   cart: [],
@@ -11,7 +10,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     CART_ADD_ITEM: (state, action) => {
-      const exists = state.cart.find((item) => item.id === action.payload.id);
+      const exists = state.cart.find((item) => item._id === action.payload._id);
       if (exists) {
         exists.count = exists.count + 1;
       } else {
@@ -19,17 +18,17 @@ export const cartSlice = createSlice({
       }
     },
     CART_DELETE_ITEM: (state, action) => {
-      state.cart = state.cart.filter((item) => item.id !== action.payload);
+      state.cart = state.cart.filter((item) => item._id !== action.payload);
     },
     ITEM_INCREMENT: (state, action) => {
       const prodToIncrement = state.cart.find(
-        (item) => item.id === action.payload,
+        (item) => item._id === action.payload,
       );
       prodToIncrement.count += 1;
     },
     ITEM_DECREMENT: (state, action) => {
       const prodToIncrement = state.cart.find(
-        (item) => item.id === action.payload,
+        (item) => item._id === action.payload,
       );
 
       prodToIncrement.count === 1

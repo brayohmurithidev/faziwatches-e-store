@@ -4,6 +4,7 @@ import { FavoriteBorder, Person, ShoppingBasket } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getCart } from "../features/cart/cartSlice";
+import ProfileMenu from "./ProfileMenu";
 
 const CounterIcon = () => {
   const items = useSelector(getCart);
@@ -11,16 +12,12 @@ const CounterIcon = () => {
     <div className="CounterIconsWrapper">
       <div className="icon1">
         <IconButton>
-          <Person sx={{ color: "#fff" }} />
-        </IconButton>
-      </div>
-      <div className="icon1">
-        <IconButton>
           <div className="mainIcon">
             <div className="icon">
               <FavoriteBorder
                 sx={{
                   color: "#fff",
+                  fontSize: "32px",
                 }}
               />
             </div>
@@ -34,7 +31,7 @@ const CounterIcon = () => {
         <Link to="/cart">
           <div className="mainIcon">
             <div className="icon">
-              <ShoppingBasket sx={{ color: "#fff" }} />
+              <ShoppingBasket sx={{ color: "#fff", fontSize: "32px" }} />
             </div>
             <div className="counterWrapper">
               <span>{items.length}</span>
@@ -42,6 +39,14 @@ const CounterIcon = () => {
           </div>
           <p className="cart-totals">$0.00</p>
         </Link>
+      </div>
+      <div className="icon1">
+        <IconButton className="profile-icon">
+          <Person sx={{ color: "#fff", fontSize: "32px" }} />
+          <div className="dropdown-menu">
+            <ProfileMenu />
+          </div>
+        </IconButton>
       </div>
     </div>
   );

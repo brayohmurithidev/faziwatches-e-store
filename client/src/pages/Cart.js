@@ -73,7 +73,7 @@ const Cart = () => {
                       <Increment product={item} />
 
                       <div className="item-delete">
-                        <IconButton onClick={() => handleDelete(item.id)}>
+                        <IconButton onClick={() => handleDelete(item._id)}>
                           <Clear sx={{ color: "red" }} />
                         </IconButton>
                       </div>

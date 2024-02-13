@@ -15,11 +15,6 @@ const menus = [
     url: "/",
   },
   {
-    name: "About",
-    icon: <Settings />,
-    url: "/about",
-  },
-  {
     name: "Shop",
     icon: <Shop />,
     url: "/products",

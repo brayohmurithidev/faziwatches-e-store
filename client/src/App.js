@@ -5,7 +5,6 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
-  useSearchParams,
 } from "react-router-dom";
 import LandingPage, { landingLoader } from "./pages/LandingPage";
 import About from "./pages/About";
@@ -16,12 +15,16 @@ import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 import ErrorHandler from "./components/ErrorHandler";
 import * as React from "react";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route element={<MainLayout />}>
         <Route path="/" loader={landingLoader} element={<LandingPage />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
         <Route element={<PagesLayout />}>
           <Route path="/about" element={<About />} />
 

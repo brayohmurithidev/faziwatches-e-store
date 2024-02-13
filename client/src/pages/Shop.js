@@ -17,9 +17,6 @@ const Shop = () => {
   const [sort, setSort] = useState("");
   const [sorted, setSorted] = useState(products);
 
-  // GET SEARCH PARAMS
-  const search = new URL(document.location).searchParams.get("search");
-
   // EXTRACT CATEGORIES
   const categories = [
     ...new Set(products?.map((prod) => prod.categories).flat()),
@@ -29,21 +26,21 @@ const Shop = () => {
     setSort(e.target.value);
   };
 
+  const search = new URL(document.location).searchParams.get("search");
+
   useEffect(() => {
+    // GET SEARCH PARAMS
+
     const fetchprod = async () => {
-      try {
-        const res = await axios.get(
-          search
-            ? `http://localhost:8000/api/products?search=${search}`
-            : `http://localhost:8000/api/products`,
-        );
-        products = res.data.data;
-      } catch (err) {
-        throw err;
-      }
+      const res = await axios.get(
+        search
+          ? `http://localhost:8000/api/products?search=${search}`
+          : `http://localhost:8000/api/products`,
+      );
+      products = res.data.data;
     };
 
-    fetchprod();
+    fetchprod().catch((e) => e);
   }, [search]);
 
   useEffect(() => {

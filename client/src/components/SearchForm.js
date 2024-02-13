@@ -9,6 +9,11 @@ const SearchForm = (props) => {
   return (
     <div className="header-search">
       <input
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            return navigate(`/products?search=${value}`);
+          }
+        }}
         type={props?.type}
         onChange={(e) => setValue(e.target.value)}
         placeholder={props?.placeholder}

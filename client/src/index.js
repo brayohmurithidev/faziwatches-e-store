@@ -7,6 +7,9 @@ import { ThemeProvider } from "@mui/material";
 import { theme } from "./assets/muiTheme";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
+import { fetchCountries } from "./features/countries/countriesSlice";
+
+store.dispatch(fetchCountries());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

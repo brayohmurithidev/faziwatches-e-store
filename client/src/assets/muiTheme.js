@@ -3,8 +3,8 @@ import { createTheme } from "@mui/material";
 export const theme = createTheme({
   palette: {
     mode: "dark",
-    primary: { main: "#FFD700" },
-    secondary: { main: "#5e3b00" },
+    primary: { main: "#5e3b00" },
+    secondary: { main: "#FFD700" },
   },
   components: {
     MuiSelect: {

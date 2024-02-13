@@ -22,7 +22,6 @@ import { useLoaderData } from "react-router-dom";
 
 const LandingPage = (props) => {
   const data = useLoaderData().data;
-  console.log(data.filter((prod) => prod.isFeatured === true));
   const products = data;
   const [productCategory, setProductCategory] = useState("Watches");
 

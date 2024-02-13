@@ -29,7 +29,7 @@ const Product = () => {
   ];
 
   useEffect(() => {
-    if (items.find((item) => item.id === product.id)) {
+    if (items.find((item) => item._id === product._id)) {
       setIsAddedToCart(true);
     }
   }, [product, items]);
@@ -38,7 +38,7 @@ const Product = () => {
   const handleAddToCart = (prod) => {
     dispatch(
       CART_ADD_ITEM({
-        id: prod.id,
+        _id: prod._id,
         image: prod.images[0],
         productName: prod.productName,
         price: prod.price.regular,
@@ -57,7 +57,7 @@ const Product = () => {
           <ProductImage images={product?.images} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Typography variant="body1">PRODUCT ID: {product?.id}</Typography>
+          <Typography variant="body1">PRODUCT ID: {product?._id}</Typography>
           <Typography variant="h4" sx={{ fontWeight: 700 }}>
             {product?.productName}
           </Typography>
@@ -68,8 +68,12 @@ const Product = () => {
           >
             {product?.categories?.join(", ")}
           </Typography>
-          {product?.rating >= 1 && (
-            <Rating name="read-only" value={product?.rating} readOnly />
+          {product?.otherAttributes?.rating >= 1 && (
+            <Rating
+              name="read-only"
+              value={product?.otherAttributes?.rating}
+              readOnly
+            />
           )}
           <div
             style={{
