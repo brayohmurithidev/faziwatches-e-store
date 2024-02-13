@@ -2,7 +2,7 @@ import { User } from "../../db/schemas/user.schema.js";
 import { APIResponse } from "../../utils/response.js";
 import bcrypt from "bcrypt";
 
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
   const data = req.body;
   const password = bcrypt.hashSync(data.password, 10);
   try {
@@ -27,7 +27,7 @@ export const createUser = async (req, res) => {
 };
 
 //GET USERS
-export const getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
     res.json({ data: users });
@@ -35,15 +35,5 @@ export const getAllUsers = async (req, res) => {
     console.log(e);
   }
 };
-//GET USER BY ID
-export const getUser = async (req, res) => {
-  try {
-    const { userId } = req.params;
-    const user = await User.findOne({
-      _id: userId,
-    });
-    res.json({ data: user });
-  } catch (e) {
-    console.log(e);
-  }
-};
+
+export { getAllUsers, createUser };
