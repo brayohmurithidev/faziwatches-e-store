@@ -1,0 +1,10 @@
+{
+  "name": "faziwatches",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node api/v1/app.js"
+  },
+  "dependencies": {
+  }
+}
