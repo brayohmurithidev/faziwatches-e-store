@@ -2,6 +2,7 @@ import {User} from "../../db/schemas/user.schema.js";
 import {APIResponse} from "../../utils/response.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import {toObjectId} from "../../utils/db.utils.js";
 
 
 export const createUser = async (req, res) => {
@@ -58,3 +59,20 @@ export const getUserProfile = async (req, res) => {
     }
 }
 
+
+// UPDATE USER ADDRESSES
+export const update_addresses = async (req, res) => {
+    const currentUser = req.currentUser
+    const data = req.body;
+    try {
+        const update = await User.updateOne({_id: toObjectId(currentUser)}, {
+            $push: {
+                addresses: data
+            }
+        });
+        return res.status(200).send(APIResponse('Updated Successfully', 200, null))
+    } catch (e) {
+        console.log(e)
+        return res.status(500).send(APIResponse(null, 500, e));
+    }
+}

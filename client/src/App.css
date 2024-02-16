@@ -28,31 +28,34 @@ a {
     min-height: 50vh;
     margin: 60px auto 60px auto;
 }
-.link{
+
+.link {
     color: var(--accent-color)
 }
-.text-field{
-    border: 1px solid var(--lightGray-color) !important;
-    border-radius: 6px !important;
-}
-.no-notification{
+
+/*.text-field {*/
+/*    border: 1px solid var(--lightGray-color) !important;*/
+/*    border-radius: 6px !important;*/
+/*}*/
+
+.no-notification {
     display: none
 }
-.notification{
+
+.notification {
     box-sizing: border-box;
     border-radius: 10px;
     padding: 20px 10px;
     color: #fff;
 }
-.success{
+
+.success {
     background-color: #2aae8c;
 }
-.error{
+
+.error {
     background-color: #fa3f64;
 }
-
-
-
 
 
 @media screen and (min-width: 320px) {
@@ -215,36 +218,41 @@ a {
     }
 
     /*DROPDOWN MENU PROFILE*/
-    .profile-icon{
+    .profile-icon {
         position: relative;
     }
-    .profile-icon .dropdown-menu{
+
+    .profile-icon .dropdown-menu {
         display: none;
     }
-    .profile-icon:hover .dropdown-menu{
+
+    .profile-icon:hover .dropdown-menu {
         position: absolute;
         border: 1px solid #ccc;
         box-sizing: border-box;
-        padding:10px;
+        padding: 10px;
         border-radius: 6px;
         top: 40px;
         z-index: 999;
         display: inline-block;
     }
+
     .profileMenu-wrapper {
         display: flex;
         flex-direction: column;
         width: fit-content;
         gap: 10px;
     }
-    .profileMenu-wrapper *{
+
+    .profileMenu-wrapper * {
         color: #fff;
     }
-    .profileMenu-wrapper *:hover{
+
+    .profileMenu-wrapper *:hover {
         color: var(--primary-color)
     }
 
-        .active {
+    .active {
         color: var(--primary-color);
     }
 
@@ -634,9 +642,10 @@ a {
         text-decoration: none;
     }
 
-    .checkout-main, .payment-processing {
+    .checkout-main, .payment-processing, .addresses-wrapper {
         background-color: var(--lightGray-color);
-        padding-bottom: 10px;
+        padding: 10px;
+        box-sizing: border-box;
     }
 
     .checkout-main {
@@ -673,10 +682,6 @@ a {
         background-repeat: no-repeat;
     }
 
-    .payment-processing {
-        padding: 10px;
-    }
-
     .payment-details {
         margin-top: 30px;
 
@@ -687,7 +692,6 @@ a {
     }
 
     /*signup*/
-
     .signup-main {
         width: 455px;
         min-height: 624px;
@@ -744,6 +748,14 @@ a {
         display: flex;
         flex-direction: column;
         align-self: center;
+    }
+
+    /*    ADDRESSES FORM*/
+    .address-form {
+        margin: 20px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
 }
 
@@ -849,10 +861,10 @@ a {
         font-size: 16px;
     }
 
-    .signup-main, .login-main{
-       width: 540px;
-        padding-left:40px ;
-        padding-right:40px ;
+    .signup-main, .login-main {
+        width: 540px;
+        padding-left: 40px;
+        padding-right: 40px;
     }
 
 }

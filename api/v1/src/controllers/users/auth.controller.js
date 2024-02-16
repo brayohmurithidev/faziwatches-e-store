@@ -67,6 +67,7 @@ export const verifyToken = async (req, res, next) => {
                 .status(401)
                 .send(APIResponse(null, 401, "Unauthorized: Invalid token"));
         }
+        req.currentUser = decodeToken.user._id
         next();
     } catch (e) {
         if (e?.name === "TokenExpiredError") {
