@@ -5,8 +5,8 @@
   "description": "Watches e-commerce backend service",
   "main": "src/app.js",
   "scripts": {
-    "dev": "concurrently \"npm start\" \" cd ../../client && npm start \"",
-    "test": "nodemon src/app.js"
+    "dev": "concurrently \"npm run test\" \" cd ../../client && npm start \"",
+    "test": "nodemon src/app.js",
     "start": "node src/app.js"
   },
   "keywords": [

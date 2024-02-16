@@ -94,7 +94,7 @@ const Login = () => {
                 />
                 <TextField
                     className="text-field"
-                    type="password"
+                    type={showPassword ? 'text' : "password"}
                     placeholder="Password"
                     name="password"
                     value={formik.values.password}
