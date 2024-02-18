@@ -55,7 +55,7 @@ export const getUserProfile = async (req, res) => {
         };
         return res.status(200).send(APIResponse(userData, 200, null))
     } catch (e) {
-        return res.status(500).send(APIResponse(null, 500, e));
+        return res.status(500).send(APIResponse(null, 500, 'The error happens here'));
     }
 }
 

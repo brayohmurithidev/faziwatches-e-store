@@ -18,7 +18,7 @@ const payments = [mpesa, visa, paypal, mastercard];
 const Cart = () => {
     const {token, userInfo} = useSelector(state => state.auth)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [phone, setPhone] = useState(userInfo.addresses[0].phone || '')
+    const [phone, setPhone] = useState(userInfo?.hasOwnProperty('addresses') ? userInfo?.addresses[0]?.phone : '');
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const [total, setTotal] = useState(0);
@@ -26,7 +26,6 @@ const Cart = () => {
     // GET CARTS
     const cart = useSelector(getCart);
     const items = cart.cart || cart
-    console.log('items', items)
 
 
     // REMEOVE ITEM
@@ -139,7 +138,7 @@ const Cart = () => {
                     {/*  PAYMENT*/}
                     {isLoggedIn && (
                         <>
-                            {userInfo.addresses.length === 0 ?
+                            {userInfo !== null && userInfo.hasOwnProperty('addresses') && userInfo?.addresses.length === 0 ?
                                 <div className='addresses-wrapper'>
                                     <h3>ADD A SHIPPING ADDRESS</h3>
                                     <AddressForm/>

@@ -10,7 +10,7 @@ import {
     InputAdornment,
     TextField,
 } from "@mui/material";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {Email, FacebookRounded, Google, Lock, Visibility, VisibilityOff,} from "@mui/icons-material";
 import {useFormik} from "formik";
 import * as yup from "yup";
@@ -34,12 +34,13 @@ const Login = () => {
     const {status, error, token, userInfo} = useSelector(state => state.auth)
     const dispatch = useDispatch();
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location?.state?.from || '/profile';
 
     // CHECK IF USER LOGGED IN AND REDIRECT
     useEffect(() => {
-        console.log(userInfo)
         if (token) {
-            navigate('/cart')
+            navigate(from)
         }
     }, [navigate, userInfo]);
 

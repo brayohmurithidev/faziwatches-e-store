@@ -1,4 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {BASEURL} from "../../services/apiService";
 import axios from "axios";
 
 
@@ -17,6 +18,7 @@ const authSlice = createSlice({
     reducers: {
         logout: (state) => {
             localStorage.removeItem('token')
+            localStorage.removeItem('refresh_token')
             state.status = ''
             state.userInfo = null
             state.token = null
@@ -50,8 +52,11 @@ export default authSlice.reducer;
 
 export const loginUser = createAsyncThunk('auth/login', async ({email, password}, {rejectWithValue}) => {
     try {
-        const {data} = await axios.post('http://localhost:8000/api/auth', {email, password});
+        const {data} = await axios.post(`${BASEURL}/auth`, {email, password});
+
         localStorage.setItem('token', data.token)
+        localStorage.setItem('refresh_token', data.refresh_token)
+
         return data
     } catch (e) {
         if (e.respond && e.response.data.message) {

@@ -35,7 +35,7 @@ export const login = async (req, res) => {
         const token = jwt.sign(
             {user: {_id: user._id, email: user.email}},
             process.env.SECRET,
-            {expiresIn: "1hr"},
+            {expiresIn: "10s"},
         );
         const refresh_token = jwt.sign(
             {user: {_id: user._id, email: user.email}},
@@ -44,7 +44,7 @@ export const login = async (req, res) => {
         );
         res.cookie("refresh_token", refresh_token);
         res.cookie("token", token);
-        return res.status(200).send({token, user: userData}, 200, null);
+        return res.status(200).send({token, user: userData, refresh_token}, 200, null);
     } catch (e) {
         console.log(e);
         res.status(500).send(APIResponse(null, 500, e));
@@ -82,7 +82,7 @@ export const verifyToken = async (req, res, next) => {
 // REFRESH TOKEN
 export const refreshToken = (req, res) => {
     try {
-        const refreshToken = req.cookies["refresh_token"];
+        const refreshToken = req.cookies["refresh_token"] || req.body.refreshTkn;
         if (!refreshToken) {
             return res
                 .status(401)

@@ -1,11 +1,13 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "@mui/material";
 import {logout} from "../features/user/userSlice";
 
 const ProfileMenu = () => {
     const dispatch = useDispatch()
+    const location = useLocation();
+    const navigate = useNavigate()
     const {userInfo} = useSelector(state => state.auth);
 
     const {token} = useSelector(state => state.auth)
@@ -19,7 +21,7 @@ const ProfileMenu = () => {
                 </>
             ) : (
                 <>
-                    <Link to="/login">Login</Link>
+                    <Button onClick={() => navigate('/login', {state: {from: location.pathname}})}>Login</Button>
                     <Link to="/signup">Sign up</Link>
                 </>
             )}
