@@ -16,12 +16,20 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 // Middlewares goes here
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 app.use(cookieParser());
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); //enough to work
 
 // Routes goes here
+app.get('/test', (req, res) => {
+    res.status(200).json({
+        message: 'This is a test route'
+    })
+})
 app.use("/api/products", productsRoute);
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);

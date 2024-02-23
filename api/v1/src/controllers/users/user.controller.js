@@ -42,19 +42,22 @@ export const getAllUsers = async (req, res) => {
 // GET USER PROFILE
 export const getUserProfile = async (req, res) => {
     let token;
+    console.log('Trying to get user daa')
     try {
         const auth = req.headers['authorization'] || req.headers['Authorization'];
         token = auth.split(' ')[1]
         const decode = jwt.verify(token, process.env.SECRET)
-        const user = await User.findOne({email: decode.user.email})
+        const user = await User.findOne({_id: toObjectId(req.currentUser)})
         const userData = {
             _id: user._id,
             name: user.name,
             email: user.email,
             addresses: user.addresses,
+            paymentMethods: user.paymentMethods
         };
         return res.status(200).send(APIResponse(userData, 200, null))
     } catch (e) {
+        console.log(e)
         return res.status(500).send(APIResponse(null, 500, 'The error happens here'));
     }
 }
@@ -70,6 +73,7 @@ export const update_addresses = async (req, res) => {
                 addresses: data
             }
         });
+        console.log(update)
         return res.status(200).send(APIResponse('Updated Successfully', 200, null))
     } catch (e) {
         console.log(e)

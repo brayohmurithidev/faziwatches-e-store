@@ -53,21 +53,23 @@ export const login = async (req, res) => {
 
 // VERIFY TOKEN
 export const verifyToken = async (req, res, next) => {
+    const auth = req.headers['authorization'] || req.headers['Authorization'];
+    console.log('auth', auth)
     try {
-        const auth = req.headers['authorization'] || req.headers['Authorization'];
-        const token = auth.split(' ')[1]
-        if (!token) {
+        if (!auth) {
             return res
                 .status(401)
                 .send(APIResponse(null, 401, "Unauthorized: Token missing"));
         }
+        const token = auth.split(' ')[1]
         const decodeToken = jwt.verify(token, process.env.SECRET);
         if (!decodeToken) {
             return res
                 .status(401)
                 .send(APIResponse(null, 401, "Unauthorized: Invalid token"));
         }
-        req.currentUser = decodeToken.user._id
+        console.log(decodeToken)
+        req.currentUser = decodeToken._id
         next();
     } catch (e) {
         if (e?.name === "TokenExpiredError") {
@@ -75,6 +77,7 @@ export const verifyToken = async (req, res, next) => {
                 .status(401)
                 .send(APIResponse(null, 401, "Unauthorized: Token expired"));
         }
+        console.log(e)
         return res.status(500).send(APIResponse(null, 500, e));
     }
 };
@@ -82,7 +85,7 @@ export const verifyToken = async (req, res, next) => {
 // REFRESH TOKEN
 export const refreshToken = (req, res) => {
     try {
-        const refreshToken = req.cookies["refresh_token"] || req.body.refreshTkn;
+        const refreshToken = req.body.refreshTkn || req.cookies["refresh_token"];
         if (!refreshToken) {
             return res
                 .status(401)
