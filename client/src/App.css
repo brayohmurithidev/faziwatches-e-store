@@ -33,6 +33,56 @@ a {
     color: var(--accent-color)
 }
 
+.unauthorized {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    justify-content: center;
+}
+
+.unauthorized span {
+    font-size: 20px;
+}
+
+
+/*MY MODAL*/
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.modal-content {
+    position: relative;
+    z-index: 2;
+    max-width: 90%;
+    max-height: 90%;
+    background-color: var(--card-background-color);
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.close-button {
+    cursor: pointer;
+    align-self: end;
+}
+
+
 /*.text-field {*/
 /*    border: 1px solid var(--lightGray-color) !important;*/
 /*    border-radius: 6px !important;*/
@@ -58,7 +108,8 @@ a {
 }
 
 
-@media screen and (min-width: 320px) {
+@media screen and (min-width: 0px) {
+
     .App {
         /*width: 90%;*/
         margin: 0 auto;
@@ -184,7 +235,7 @@ a {
         background-color: var(--primary-color);
         top: -9px;
         right: -9px;
-        z-index: 999;
+        /*z-index: 1;*/
     }
 
     .cart-totals {
@@ -761,7 +812,7 @@ a {
 
 
 /*ipads and tablets*/
-@media screen and  (min-width: 481px) {
+@media screen and  (min-width: 600px) {
 
 
     /*NAVBAR STYLES*/
@@ -807,12 +858,92 @@ a {
         text-align: center;
     }
 
+    /*    PROFILE PAGE*/
+    /*.profile-sidebar {*/
+    /*}*/
+    /*.profile-main {*/
+    /*}*/
+    .profile-wrapper {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .profile-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .profile-navigation {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+    }
+
+
+    .card-title-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+
+    /*    BILLING DATA*/
+    .billing-data-wrapper {
+        margin-top: 30px;
+        box-sizing: border-box;
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .add-payment-btn {
+        align-self: end;
+        margin-bottom: 30px;
+    }
+
+    .billing-info {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .billing-data h4 {
+        width: 20%;
+    }
+
+    .billing-data {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .billing-payment-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+
+    .billing-payment-wrapper div {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
 
 }
 
 /*laptops*/
-@media screen and  (min-width: 769px) {
-
+@media screen and  (min-width: 960px) {
+    /*MODAL SETTINGS*/
+    .modal-content {
+        max-width: 50%;
+        height: fit-content;
+    }
 
     /*NAVBAR STYLES*/
     .navbarWrapper {
@@ -870,7 +1001,7 @@ a {
 }
 
 /*Screens  larger than laptops*/
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1280px) {
     /*Hero section*/
     .App {
         width: 80%;
@@ -885,6 +1016,6 @@ a {
 }
 
 /*TV SETS*/
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1920px) {
 
 }

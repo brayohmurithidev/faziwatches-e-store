@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {logout} from "../features/user/userSlice";
+import {logout, updateToken} from "../features/user/userSlice";
 
 
 //define base url and endpoints
@@ -18,28 +18,39 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions);
 
-    if (result.error && result.error.status === 401) {
-        console.log('trying to refresh token')
-        const refreshResult = await baseQuery({
-                url: '/auth/refresh-token',
-                method: 'POST',
-                body: {
-                    refreshTkn: localStorage.getItem('refresh_token')
-                }
-            }, {...api}, extraOptions
-        );
-        console.log('refresh', refreshResult)
-        if (refreshResult.error) {
-            console.error('Refresh token error:', refreshResult.error);
-        }
-        if (refreshResult.data) {
-            console.log(" refresh result", refreshResult.data.data.token)
-            // store new token
-            localStorage.setItem('token', refreshResult.data.data.token);
-            //     retry the initial query
-            result = await baseQuery(args, api, extraOptions)
+    if (result.error) {
+        if (result.error.status === 401) {
+            console.log('trying to refresh token')
+            const refreshResult = await baseQuery({
+                    url: '/auth/refresh-token',
+                    method: 'POST',
+                    body: {
+                        refreshTkn: localStorage.getItem('refresh_token')
+                    }
+                }, {...api}, {...extraOptions, credentials: true}
+            );
+            console.log('refresh', refreshResult)
+            if (refreshResult.data) {
+                console.log(" refresh result", refreshResult.data.data.token)
+                // store new token
+                localStorage.setItem('token', refreshResult.data.data.token);
+                api.dispatch(updateToken(refreshResult.data.data.token))
+
+
+                // Update headers with the new token
+                const updatedHeaders = {
+                    ...extraOptions?.headers,
+                    Authorization: `Bearer ${refreshResult.data.data.token}`
+                };
+
+                // Retry the initial query with the updated token
+                result = await baseQuery(args, {...api, ...extraOptions, headers: updatedHeaders});
+            } else {
+                console.log('refresh-error', refreshResult)
+                return api.dispatch(logout())
+            }
         } else {
-            api.dispatch(logout())
+            return api.dispatch(logout())
         }
     }
     console.log('results', result)

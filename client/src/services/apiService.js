@@ -2,6 +2,15 @@ import axios from 'axios';
 
 export const BASEURL = 'http://localhost:8000/api';
 
+export const Axios = axios.create({
+    baseURL: BASEURL,
+    headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+    },
+    withCredentials: true
+})
+
+
 const apiService = axios.create({
     baseURL: BASEURL
 })

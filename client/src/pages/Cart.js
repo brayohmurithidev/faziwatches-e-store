@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {Button, Divider, FormControl, Grid, IconButton, InputLabel, MenuItem, Select, TextField,} from "@mui/material";
 import {Clear} from "@mui/icons-material";
-import {Form, Link, useNavigate} from "react-router-dom";
+import {Form, Link, useLocation, useNavigate} from "react-router-dom";
 
 // payments icons
 import mpesa from "../assets/icons/mpesa.png";
@@ -16,6 +16,8 @@ import AddressForm from "../components/AddressesForm";
 const payments = [mpesa, visa, paypal, mastercard];
 
 const Cart = () => {
+
+    const location = useLocation();
     const {token, userInfo} = useSelector(state => state.auth)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [phone, setPhone] = useState(userInfo?.hasOwnProperty('addresses') ? userInfo?.addresses[0]?.phone : '');
@@ -118,7 +120,7 @@ const Cart = () => {
                         <Divider/>
                         <div className="checkout-button-wrapper">
                             <Button
-                                onClick={() => token ? setIsLoggedIn(true) : navigate('/login')}
+                                onClick={() => token ? setIsLoggedIn(true) : navigate('/login', {state: {from: location.pathname}})}
                                 sx={{
                                     backgroundColor: "var(--accent-color)",
                                     color: "var(--white-color)",

@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Box, Button, FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import * as yup from 'yup'
 import {useFormik} from "formik";
+
+import {Axios} from "../services/apiService";
+import {useSelector} from "react-redux";
 
 
 const initialValues = {
@@ -29,10 +32,37 @@ const validationSchema = yup.object({
 
 
 const AddressForm = () => {
+    const countries = useSelector(state => state.countries.countries)
+    const [states, setStates] = useState(null)
+    const [message, setMessage] = useState({
+        type: "",
+        msg: "",
+    });
     const formik = useFormik({
-        initialValues, validationSchema: validationSchema, onSubmit: async (values, action) => {
+        initialValues, validationSchema: validationSchema, onSubmit: async (values, actions) => {
+            console.log(values);
+            try {
+                const res = await Axios.put(`/users/address`, values);
+                setMessage({
+                    type: "success",
+                    msg: "Address Updated Successfully",
+                });
+                actions.resetForm({
+                    values: initialValues,
+                });
+                actions.setSubmitting(false);
+            } catch (e) {
+                console.log(e)
+                setMessage({type: "error", msg: "An error occured"});
+                actions.setSubmitting(false);
+            }
         }
     })
+
+    useEffect(() => {
+        const filteredStates = countries.filter(country => country.iso2 === formik.values.country);
+        setStates(filteredStates[0]?.states)
+    }, [formik.values.country]);
     return (
         <Box component='form' className='address-form' onSubmit={formik.handleSubmit}>
             <FormControl fullWidth>
@@ -56,9 +86,10 @@ const AddressForm = () => {
                         onBlur={formik.handleBlur}
                         error={formik.touched.country && Boolean(formik.errors.country)}
                         helperText={formik.touched.country && formik.errors.country}>
-                    <MenuItem value='ke'>Kenya</MenuItem>
-                    <MenuItem value='ug'>Uganda</MenuItem>
-                    <MenuItem value='tz'>Tanzania</MenuItem>
+                    {countries && countries.map((country, i) => (
+                        <MenuItem key={i} value={country.iso2}>{country.name}</MenuItem>
+                    ))}
+
                 </Select>
             </FormControl>
             <FormControl fullWidth>
@@ -70,9 +101,12 @@ const AddressForm = () => {
                         error={formik.touched.state && Boolean(formik.errors.state)}
                         helperText={formik.touched.state && formik.errors.state}>
 
-                    <MenuItem value='ke'>Kenya</MenuItem>
-                    <MenuItem value='ug'>Uganda</MenuItem>
-                    <MenuItem value='tz'>Tanzania</MenuItem>
+                    {
+                        states && states.map((state, i) => (
+                            <MenuItem key={i} value={state.name}>{state.name}</MenuItem>
+                        ))
+                    }
+
                 </Select>
             </FormControl>
             <FormControl fullWidth>
@@ -99,8 +133,20 @@ const AddressForm = () => {
                            error={formik.touched.phone && Boolean(formik.errors.phone)}
                            helperText={formik.touched.phone && formik.errors.phone}/>
             </FormControl>
-            <Button variant='contained' type='submit'>
-                UPDATE SHIPPING ADDRESS
+            <p
+                className={
+                    message.type === "success"
+                        ? "notification success"
+                        : message.type === "error"
+                            ? "notification error"
+                            : "no-notification"
+                }
+            >
+                {message.msg}
+            </p>
+            <Button disabled={formik.isSubmitting} variant='contained' type='submit'>
+                {formik.isSubmitting ? "Please wait ..." : "UPDATE SHIPPING ADDRESS"}
+
             </Button>
         </Box>
     );
