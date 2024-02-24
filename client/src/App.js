@@ -12,13 +12,14 @@ import ErrorHandler from "./components/ErrorHandler";
 import * as React from "react";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Profile from "./components/Profile";
+import Profile from "./pages/Profile";
+import ErrorPage from "./pages/ErrorPage";
 import ProtectedRoute from "./routing/ProtectedRoute";
 
 function App() {
     const router = createBrowserRouter(
         createRoutesFromElements(
-            <Route element={<MainLayout/>}>
+            <Route element={<MainLayout/>} errorElement={<ErrorPage/>}>
                 <Route path="/" loader={landingLoader} element={<LandingPage/>}/>
                 <Route path="/signup" element={<Signup/>}/>
                 <Route path="/login" element={<Login/>}/>
