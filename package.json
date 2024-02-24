@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "node api/v1/app.js"
+    "start": "node api/v1/app.js",
+    "dev": "concurrently \"cd api/v1 && npm run test\" \" cd client && npm start \""
   },
-  "dependencies": {
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }
