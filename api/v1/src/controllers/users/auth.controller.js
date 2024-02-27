@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
     try {
         const data = req.body;
         const user = await User.findOne({
@@ -46,8 +46,7 @@ export const login = async (req, res) => {
         res.cookie("token", token);
         return res.status(200).send({token, user: userData, refresh_token}, 200, null);
     } catch (e) {
-        console.log(e);
-        res.status(500).send(APIResponse(null, 500, e));
+        return next(e)
     }
 };
 
@@ -77,13 +76,12 @@ export const verifyToken = async (req, res, next) => {
                 .status(401)
                 .send(APIResponse(null, 401, "Unauthorized: Token expired"));
         }
-        console.log(e)
-        return res.status(500).send(APIResponse(null, 500, e));
+        return next(e)
     }
 };
 
 // REFRESH TOKEN
-export const refreshToken = (req, res) => {
+export const refreshToken = (req, res, next) => {
     try {
         const refreshToken = req.body.refreshTkn || req.cookies["refresh_token"];
         if (!refreshToken) {
@@ -103,6 +101,6 @@ export const refreshToken = (req, res) => {
         res.cookie("token", token);
         return res.status(200).send(APIResponse({user: decodeToken.user, token}));
     } catch (e) {
-        return res.status(500).send(APIResponse(null, 500, e));
+        return next(e)
     }
 };

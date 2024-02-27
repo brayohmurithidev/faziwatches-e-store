@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import {toObjectId} from "../../utils/db.utils.js";
 
 
-export const createUser = async (req, res) => {
+export const createUser = async (req, res, next) => {
     const data = req.body;
     const password = bcrypt.hashSync(data.password, 10);
     try {
@@ -25,22 +25,22 @@ export const createUser = async (req, res) => {
                     .send(APIResponse(null, 409, `${data.email} already exists`));
             }
         }
-        res.status(500).send(APIResponse(null, 500, e.code));
+        return next(e)
     }
 };
 
 //GET USERS
-export const getAllUsers = async (req, res) => {
+export const getAllUsers = async (req, res, next) => {
     try {
         const users = await User.find();
         res.json({data: users});
     } catch (e) {
-        console.log(e);
+        return next(e)
     }
 };
 
 // GET USER PROFILE
-export const getUserProfile = async (req, res) => {
+export const getUserProfile = async (req, res, next) => {
     let token;
     console.log('Trying to get user daa')
     try {
@@ -57,14 +57,13 @@ export const getUserProfile = async (req, res) => {
         };
         return res.status(200).send(APIResponse(userData, 200, null))
     } catch (e) {
-        console.log(e)
-        return res.status(500).send(APIResponse(null, 500, 'The error happens here'));
+        return next(e)
     }
 }
 
 
 // UPDATE USER ADDRESSES
-export const update_addresses = async (req, res) => {
+export const update_addresses = async (req, res, next) => {
     const currentUser = req.currentUser
     const data = req.body;
     try {
@@ -76,7 +75,24 @@ export const update_addresses = async (req, res) => {
         console.log(update)
         return res.status(200).send(APIResponse('Updated Successfully', 200, null))
     } catch (e) {
-        console.log(e)
-        return res.status(500).send(APIResponse(null, 500, e));
+        return next(e)
+    }
+}
+
+
+// UPDATE USER PAYMENT INFORMATION
+export const update_paymentMethods = async (req, res, next) => {
+    const currentUser = req.currentUser
+    const data = req.body;
+    try {
+        const update = await User.updateOne({_id: toObjectId(currentUser)}, {
+            $push: {
+                paymentMethods: data
+            }
+        });
+        console.log(update)
+        return res.status(200).send(APIResponse('Updated Successfully', 200, null))
+    } catch (e) {
+        return next(e)
     }
 }

@@ -7,8 +7,13 @@ const URI = process.env.MONGO_URI;
 
 //CREATE CONNECTION
 const connection = async () => {
-  await mongoose.connect(URI);
-  console.log("Connected to db");
+  try {
+    await mongoose.connect(URI);
+    console.log("Connected to db");
+  } catch (error) {
+    throw new Error('Fatal Error: Database failed to connect') 
+  }
+
 };
 
 //call the function and console error
