@@ -4,6 +4,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {toObjectId} from "../../utils/db.utils.js";
 
+import {v4 as uuid} from 'uuid'
+
 
 export const createUser = async (req, res, next) => {
     const data = req.body;
@@ -62,17 +64,17 @@ export const getUserProfile = async (req, res, next) => {
 }
 
 
-// UPDATE USER ADDRESSES
-export const update_addresses = async (req, res, next) => {
+// CREATE USER ADDRESSES
+export const add_user_billing_addresses = async (req, res, next) => {
     const currentUser = req.currentUser
     const data = req.body;
+        const addressToAdd = {...data, id: uuid()}
     try {
-        const update = await User.updateOne({_id: toObjectId(currentUser)}, {
+         await User.updateOne({_id: toObjectId(currentUser)}, {
             $push: {
-                addresses: data
+                addresses: addressToAdd
             }
         });
-        console.log(update)
         return res.status(200).send(APIResponse('Updated Successfully', 200, null))
     } catch (e) {
         return next(e)
@@ -80,19 +82,39 @@ export const update_addresses = async (req, res, next) => {
 }
 
 
-// UPDATE USER PAYMENT INFORMATION
-export const update_paymentMethods = async (req, res, next) => {
+// ADD PAYMENT USER PAYMENT INFORMATION
+export const addUserPayment_paymentMethods = async (req, res, next) => {
     const currentUser = req.currentUser
     const data = req.body;
+    const paymentToAdd = {...data, id: uuid()}
     try {
-        const update = await User.updateOne({_id: toObjectId(currentUser)}, {
+     await User.updateOne({_id: toObjectId(currentUser)}, {
             $push: {
-                paymentMethods: data
+                paymentMethods: paymentToAdd
             }
         });
-        console.log(update)
         return res.status(200).send(APIResponse('Updated Successfully', 200, null))
     } catch (e) {
         return next(e)
     }
+}
+
+
+// UPDATE EXISTING ADDRESS
+export const update_user_single_billing_address = async (req, res, next) =>{
+    const currentUser = req.currentUser;
+    const data = req.body;
+    const {addressId}= req.params;
+
+    try {
+       const user = await User.findOne({_id: currentUser})
+       const addressToUpdate =  user.addresses.id(toObjectId(addressId))
+       console.log(addressToUpdate)
+       res.send(user.addresses)
+        
+    } catch (error) {
+        console.log(error)
+        res.json({message: 'An error occurred'})
+    }
+
 }

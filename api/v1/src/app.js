@@ -9,7 +9,7 @@ import productsRoute from "./routes/products.route.js";
 import userRoute from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
 import mpesaRoute from "./routes/mpesa.route.js";
-import { errorHandlerMiddleware } from "./controllers/middlewares/errorHandle.middleware.js";
+import { errorHandlerMiddleware } from "./middlewares/errorHandle.middleware.js";
 import mongoose from "mongoose";
 
 dotenv.config();

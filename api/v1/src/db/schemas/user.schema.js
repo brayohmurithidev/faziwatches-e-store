@@ -1,5 +1,27 @@
 import * as mongoose from "mongoose";
 
+
+const addressSchema = new mongoose.Schema({
+    address: String,
+    country: String,
+    state: String,
+    city: String,
+    postalCode: Number,
+    phone: String,
+    isPrimary: {type: Boolean, default: false}
+})
+
+const paymentMethodSchema = new mongoose.Schema({
+    type: String,
+    details: {
+        type: Map,
+        of: String
+    }, isPrimary: {type: Boolean, default: false}
+})
+
+
+
+
 const userSchema = mongoose.Schema({
     name: {type: String, required: true},
     email: {
@@ -8,8 +30,8 @@ const userSchema = mongoose.Schema({
         unique: true,
     },
     password: {type: String, required: true},
-    addresses: [{type: Map, of: String}],
-    paymentMethods: [{type: Map, of: String}],
+    addresses: [addressSchema],
+    paymentMethods: [paymentMethodSchema],
     otherInformation: {
         type: Map,
         of: String,
