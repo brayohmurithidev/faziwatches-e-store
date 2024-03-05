@@ -71,6 +71,20 @@ export const add_user_billing_addresses = async (req, res, next) => {
   try {
     const user = await User.findOne({ _id: toObjectId(currentUser) });
 
+    // Check if the address already exists
+    const existingAddressIndex = user.addresses.findIndex(
+      (address) =>
+        address.street === addressToAdd.street &&
+        address.city === addressToAdd.city &&
+        address.state === addressToAdd.state &&
+        address.country === addressToAdd.country &&
+        address.zip === addressToAdd.zip
+    );
+
+    if (existingAddressIndex !== -1) {
+      return res.status(400).json({ message: "Address already exists" });
+    }
+
     // Check if isPrimary field is being set to true
     if (addressToAdd.isPrimary && user.addresses.length > 0) {
       // Set all other addresses' isPrimary to false
