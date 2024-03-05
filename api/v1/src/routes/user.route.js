@@ -4,6 +4,8 @@ import {
   addUserPayment_paymentMethods,
   add_user_billing_addresses,
   createUser,
+  deleteAddressById,
+  deletePaymentById,
   getAllUsers,
   getUserProfile,
   updateUserPayment_paymentMethods,
@@ -31,6 +33,14 @@ router.put(
   "/paymentMethod/:paymentMethodId",
   verifyToken,
   updateUserPayment_paymentMethods
+);
+
+// DELETE
+router.delete("/address/:addressId", verifyToken, deleteAddressById);
+router.delete(
+  "/paymentMethod/:paymentMethodId",
+  verifyToken,
+  deletePaymentById
 );
 
 export default router;
