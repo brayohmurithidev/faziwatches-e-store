@@ -32,8 +32,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      set: (v) => v.toLowerCase(),
     },
-    password: { type: String, required: true },
+    password: {
+      type: String,
+      required: true,
+    },
     addresses: [addressSchema],
     paymentMethods: [paymentMethodSchema],
     otherInformation: {

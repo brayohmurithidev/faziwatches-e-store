@@ -4,7 +4,7 @@ import mongoose, { Schema } from "mongoose";
 const itemsSchema = new Schema({
   productId: {
     type: Schema.ObjectId,
-    ref: "Inventory",
+    ref: "inventory",
     required: true,
   },
   quantity: { type: Number, required: true },
@@ -13,7 +13,7 @@ const itemsSchema = new Schema({
 
 const orderSchema = new Schema(
   {
-    userId: { type: Schema.ObjectId, ref: "User" },
+    userId: { type: Schema.ObjectId, ref: "users" },
     items: [itemsSchema],
     totalPrice: { type: Number, required: true },
     shippingAddress: {
