@@ -1,28 +1,57 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const productSchema = mongoose.Schema(
+// PRODUCTS RATINGS
+const productRatings = new mongoose.Schema(
   {
-    productName: { type: String, required: true },
-    description: String,
-    price: {
-      type: Map,
-      of: String,
-    },
-    categories: [String],
-    brand: String,
-    quantity: Number,
-    images: [String],
-    thumbnail: String,
-    isFeatured: Boolean,
-    isAvailable: Boolean,
-    otherAttributes: {
-      type: Map,
-      of: String,
-    },
+    userId: { type: Schema.Types.ObjectId, ref: "User" },
+    rating: { type: Number },
+    review: { type: String },
+    date: { type: Date, default: Date.now },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
-const Product = mongoose.model("products", productSchema);
+//PRODUCT VARIANTS
+const productVariants = new mongoose.Schema(
+  {
+    variant: String,
+    options: [String],
+  },
+  { timestamps: true }
+);
 
-export { Product };
+//
+
+const productSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    description: String,
+    price: { type: Number, required: true },
+    discountedPrice: Number,
+    images: [String],
+    categories: String,
+    tags: [String],
+    variants: [productVariants],
+    quantity: { type: Number, default: 0 },
+    ratings: [productRatings],
+    isFeatured: Boolean,
+    isAvailable: { type: Boolean },
+    sellerInfo: {
+      name: String,
+      description: String,
+      phone: String,
+      email: String,
+    },
+  },
+  { timestamps: true }
+);
+
+// Pre-save middleware to set isAvailable based on quantity
+productSchema.pre("save", function (next) {
+  this.isAvailable = this.quantity > 0;
+  next();
+});
+
+const Inventory = mongoose.model("inventory", productSchema);
+
+export { Inventory };
