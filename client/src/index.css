@@ -1,48 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,700;0,800;1,300;1,400;1,500&display=swap');
 
-* {
-    padding: 0;
-    margin: 0;
+:root{
+  --primary-color: #cb0f74;
+  --black-color: #000000;
+  --text-color: #252525;
+  --footer-bg-color: #252525;
+  --footer-text-color: #ffffff;
+  --white-color: #ffffff;
+  --background-color: #ffffff;
 
-}
-
-*, :after, :before {
-    box-sizing: border-box;
-}
-
-:root {
-    --background-color: #1E1E1E;
-    --card-background-color: #929292;
-    --primary-color: #FFD700;
-    --secondary-color: #006E5D;
-    --accent-color: #ff8c33;
-    --hero-color: #c2c2c2;
-    --lightGray-color: #454545;
-    --white-color: #fff;
-
-    /*--desertSand-color: #edc9a7;*/
-    --h1: 2.986rem;
-    --h2: 2.488rem;
-    --h3: 2.074rem;
-    --h4: 1.728rem;
-    --h5: 1.44rem;
-    --h6: 1.2rem;
-    --p: 1rem;
-    --sm-text: 0.833rem;
 }
 
 body {
-    margin: 0;
-    background-color: #fff;
-    font-family: 'Open Sans', sans-serif;
-    /*-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',*/
-    /*  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',*/
-    /*  sans-serif;*/
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
